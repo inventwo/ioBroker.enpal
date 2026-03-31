@@ -2,6 +2,11 @@
 	"i18n": true,
 	"type": "panel",
 	"items": {
+		"_info": {
+            "type": "header",
+            "text": "ENPAL InfluxDB Configuration",
+            "size": 3
+        },
 		"influx_url": {
 			"type": "text",
 			"label": "influx_url",
@@ -9,9 +14,9 @@
 			"default": "http://localhost:8086",
 			"xs": 12,
 			"sm": 12,
-			"md": 8,
-			"lg": 6,
-			"xl": 6
+			"md": 12,
+			"lg": 12,
+			"xl": 12
 		},
 		"influx_token": {
 			"type": "password",
@@ -19,9 +24,9 @@
 			"newLine": true,
 			"xs": 12,
 			"sm": 12,
-			"md": 8,
-			"lg": 6,
-			"xl": 6
+			"md": 12,
+			"lg": 12,
+			"xl": 12
 		},
 		"influx_org": {
 			"type": "text",
@@ -29,19 +34,19 @@
 			"newLine": true,
 			"xs": 12,
 			"sm": 12,
-			"md": 6,
-			"lg": 4,
-			"xl": 4
+			"md": 12,
+			"lg": 12,
+			"xl": 12
 		},
 		"influx_bucket": {
 			"type": "text",
 			"label": "influx_bucket",
-			"newLine": false,
+			"newLine": true,
 			"xs": 12,
 			"sm": 12,
-			"md": 6,
-			"lg": 4,
-			"xl": 4
+			"md": 12,
+			"lg": 12,
+			"xl": 12
 		},
 		"interval_ms": {
 			"type": "number",
@@ -51,9 +56,9 @@
 			"min": 5000,
 			"xs": 12,
 			"sm": 12,
-			"md": 6,
-			"lg": 4,
-			"xl": 4
+			"md": 12,
+			"lg": 12,
+			"xl": 12
 		}
 	}
 }
