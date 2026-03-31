@@ -3,11 +3,10 @@ updates:
   - package-ecosystem: npm
     directory: "/"
     schedule:
-      interval: monthly
-      day: 5
-      time: "00:05"
+      interval: cron
+      cron: "5 4 * * 1"
       timezone: Europe/Berlin
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 15
     assignees:
       - inventwo
     versioning-strategy: increase
@@ -15,10 +14,9 @@ updates:
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
-      interval: monthly
-      day: 5
-      time: "00:05"
+      interval: cron
+      cron: "15 4 * * 1"
       timezone: Europe/Berlin
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 15
     assignees:
       - inventwo

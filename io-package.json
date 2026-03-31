@@ -88,6 +88,8 @@
 			"influx_bucket": "",
 			"interval_ms": 60000
 	},
+	"protectedNative": ["influx_token"],
+	"encryptedNative": ["influx_token"],
 	"objects": [],
 	"instanceObjects": [
 		{
