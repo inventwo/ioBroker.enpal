@@ -26,7 +26,7 @@ class Enpal extends utils.Adapter {
 		await this.setState('info.connection', false, true);
 
 		if (!influxToken || !influxOrg || !influxBucket) {
-			this.log.error('InfluxDB-Konfiguration unvollständig. Bitte URL, Token, Org-ID und Bucket konfigurieren.');
+			this.log.error('InfluxDB configuration incomplete. Please configure URL, token, org ID and bucket.');
 			return;
 		}
 
@@ -48,7 +48,7 @@ class Enpal extends utils.Adapter {
 			}
 			callback();
 		} catch (error) {
-			this.log.error(`Fehler beim Beenden: ${error.message}`);
+			this.log.error(`Error during unload: ${error.message}`);
 			callback();
 		}
 	}
@@ -59,7 +59,7 @@ class Enpal extends utils.Adapter {
 			try {
 				parsed = new URL(influxUrl);
 			} catch {
-				return reject(new Error(`Ungültige InfluxDB-URL: ${influxUrl}`));
+				return reject(new Error(`Invalid InfluxDB URL: ${influxUrl}`));
 			}
 
 			const lib = parsed.protocol === 'https:' ? https : http;
@@ -82,9 +82,9 @@ class Enpal extends utils.Adapter {
 				});
 				res.on('end', () => {
 					if (res.statusCode !== 200) {
-						return reject(new Error(`InfluxDB HTTP ${res.statusCode}: ${data}`));
+						return reject(new Error(`InfluxDB HTTP error ${res.statusCode}: ${data}`));
 					}
-					this.log.debug(`InfluxDB RAW (erste 500 Zeichen): ${data.substring(0, 500)}`);
+					this.log.debug(`InfluxDB RAW (first 500 chars): ${data.substring(0, 500)}`);
 					resolve(this.parseCsv(data));
 				});
 			});
@@ -164,19 +164,19 @@ class Enpal extends utils.Adapter {
 	}
 
 	async syncInfluxToIoBroker(influxUrl, influxToken, influxOrg, fluxQuery) {
-		this.log.debug('InfluxDB-Sync gestartet...');
+		this.log.debug('InfluxDB sync started...');
 
 		let rows;
 		try {
 			rows = await this.queryInflux(influxUrl, influxToken, influxOrg, fluxQuery);
 		} catch (e) {
-			this.log.error(`InfluxDB-Abfrage fehlgeschlagen: ${e.message}`);
+			this.log.error(`InfluxDB query failed: ${e.message}`);
 			await this.setState('info.connection', false, true);
 			return;
 		}
 
 		if (!rows.length) {
-			this.log.warn('InfluxDB: Keine Datensätze zurückgegeben.');
+			this.log.warn('InfluxDB: No records returned.');
 			await this.setState('info.connection', false, true);
 			return;
 		}
@@ -193,10 +193,10 @@ class Enpal extends utils.Adapter {
 
 			const dpId = nameParts.join('.');
 			await this.createOrUpdateState(dpId, row.value, row.unit);
-			this.log.debug(`Aktualisiert: ${dpId} = ${row.value} ${row.unit}`);
+			this.log.debug(`Updated: ${dpId} = ${row.value} ${row.unit}`);
 		}
 
-		this.log.info(`InfluxDB-Sync abgeschlossen. ${rows.length} Datenpunkte aktualisiert.`);
+		this.log.info(`InfluxDB sync completed. ${rows.length} data points updated.`);
 	}
 }
 
