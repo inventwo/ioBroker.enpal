@@ -1,4 +1,4 @@
-![Logo](admin/Enpal_Logo.svg)
+![Logo](admin/enpal_logo.svg)
 
 ## ioBroker adapter for Enpal Solar
 
@@ -75,6 +75,9 @@ Typical examples (depending on your inverter and Enpal configuration):
 <!--
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (skvarel) Fixed: Logoname
+
 ### 0.1.0 (2026-03-31)
 - (skvarel) initial release
 
