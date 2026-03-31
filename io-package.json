@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "enpal",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "news": {
+      "0.1.1": {
+        "en": "Fixed: Logoname",
+        "de": "Behoben: Logoname",
+        "ru": "Исправлено: Logoname",
+        "pt": "Corrigido: Logoname",
+        "nl": "Vast: Logonaam",
+        "fr": "Correction : nom de logo",
+        "it": "Fisso: Logoname",
+        "es": "Corregido: Nombre de logotipo",
+        "pl": "Naprawiono: nazwa logowania",
+        "uk": "Виправлено: Логотип",
+        "zh-cn": "固定: 标记名称"
+      },
       "0.1.0": {
         "en": "initial release",
         "de": "erstausstrahlung",
