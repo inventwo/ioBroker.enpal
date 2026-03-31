@@ -1,5 +1,8 @@
-{
-	"enpal adapter settings": "enpal的适配器设置",
-	"option1": "选项1",
-	"option2": "选项2"
+﻿{
+    "enpal adapter settings":  "enpal 适配器设置",
+    "influx_url":  "InfluxDB URL",
+    "influx_token":  "API 令牌",
+    "influx_org":  "组织 ID",
+    "influx_bucket":  "Bucket",
+    "interval_ms":  "查询间隔（毫秒）"
 }

@@ -1,5 +1,8 @@
 {
 	"enpal adapter settings": "Paramètres d'adaptateur pour enpal",
-	"option1": "option1",
-	"option2": "option2"
+	"influx_url": "URL InfluxDB",
+	"influx_token": "Jeton API",
+	"influx_org": "ID d'organisation",
+	"influx_bucket": "Bucket",
+	"interval_ms": "Intervalle d'interrogation (ms)"
 }

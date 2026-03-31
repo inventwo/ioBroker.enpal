@@ -1,179 +1,201 @@
 'use strict';
 
-/*
- * Created with @iobroker/create-adapter v3.1.2
- */
-
-// The adapter-core module gives you access to the core ioBroker functions
-// you need to create an adapter
 const utils = require('@iobroker/adapter-core');
-
-// Load your modules here, e.g.:
-// const fs = require('fs');
+const http = require('http');
+const https = require('https');
+const { URL } = require('url');
 
 class Enpal extends utils.Adapter {
-	/**
-	 * @param {Partial<utils.AdapterOptions>} [options] - Adapter options
-	 */
 	constructor(options) {
 		super({
 			...options,
 			name: 'enpal',
 		});
 		this.on('ready', this.onReady.bind(this));
-		this.on('stateChange', this.onStateChange.bind(this));
-		// this.on('objectChange', this.onObjectChange.bind(this));
-		// this.on('message', this.onMessage.bind(this));
 		this.on('unload', this.onUnload.bind(this));
+		this.syncInterval = null;
 	}
 
-	/**
-	 * Is called when databases are connected and adapter received configuration.
-	 */
 	async onReady() {
-		// Initialize your adapter here
+		const influxUrl = this.config.influx_url || 'http://localhost:8086';
+		const influxToken = this.config.influx_token || '';
+		const influxOrg = this.config.influx_org || '';
+		const influxBucket = this.config.influx_bucket || '';
+		const intervalMs = this.config.interval_ms || 60000;
 
-		// The adapters config (in the instance object everything under the attribute "native") is accessible via
-		// this.config:
-		this.log.debug('config option1: ${this.config.option1}');
-		this.log.debug('config option2: ${this.config.option2}');
+		if (!influxToken || !influxOrg || !influxBucket) {
+			this.log.error('InfluxDB-Konfiguration unvollständig. Bitte URL, Token, Org-ID und Bucket konfigurieren.');
+			return;
+		}
 
-		/*
-		For every state in the system there has to be also an object of type state
-		Here a simple template for a boolean variable named "testVariable"
-		Because every adapter instance uses its own unique namespace variable names can't collide with other adapters variables
+		const fluxQuery = `from(bucket: "${influxBucket}")\n  |> range(start: -24h)\n  |> last()`;
 
-		IMPORTANT: State roles should be chosen carefully based on the state's purpose.
-		           Please refer to the state roles documentation for guidance:
-		           https://www.iobroker.net/#en/documentation/dev/stateroles.md
-		*/
-		await this.setObjectNotExistsAsync('testVariable', {
+		const sync = async () => {
+			await this.syncInfluxToIoBroker(influxUrl, influxToken, influxOrg, fluxQuery);
+		};
+
+		await sync();
+		this.syncInterval = this.setInterval(sync, intervalMs);
+	}
+
+	onUnload(callback) {
+		try {
+			if (this.syncInterval) {
+				this.clearInterval(this.syncInterval);
+				this.syncInterval = null;
+			}
+			callback();
+		} catch (error) {
+			this.log.error(`Fehler beim Beenden: ${error.message}`);
+			callback();
+		}
+	}
+
+	queryInflux(influxUrl, influxToken, influxOrg, fluxQuery) {
+		return new Promise((resolve, reject) => {
+			let parsed;
+			try {
+				parsed = new URL(influxUrl);
+			} catch {
+				return reject(new Error(`Ungültige InfluxDB-URL: ${influxUrl}`));
+			}
+
+			const lib = parsed.protocol === 'https:' ? https : http;
+			const options = {
+				hostname: parsed.hostname,
+				port: parseInt(parsed.port) || (parsed.protocol === 'https:' ? 443 : 80),
+				path: `/api/v2/query?org=${encodeURIComponent(influxOrg)}`,
+				method: 'POST',
+				headers: {
+					Authorization: `Token ${influxToken}`,
+					'Content-Type': 'application/vnd.flux',
+					Accept: 'application/csv',
+				},
+			};
+
+			const req = lib.request(options, res => {
+				let data = '';
+				res.on('data', chunk => {
+					data += chunk;
+				});
+				res.on('end', () => {
+					if (res.statusCode !== 200) {
+						return reject(new Error(`InfluxDB HTTP ${res.statusCode}: ${data}`));
+					}
+					this.log.debug(`InfluxDB RAW (erste 500 Zeichen): ${data.substring(0, 500)}`);
+					resolve(this.parseCsv(data));
+				});
+			});
+
+			req.on('error', reject);
+			req.end(fluxQuery.trim());
+		});
+	}
+
+	parseCsv(csv) {
+		const lines = csv.split('\n').filter(l => l.trim() !== '' && !l.startsWith('#'));
+		if (lines.length < 2) {
+			return [];
+		}
+
+		const headers = lines[0].split(',');
+		const results = [];
+
+		for (let i = 1; i < lines.length; i++) {
+			const cols = lines[i].split(',');
+			if (cols.length < headers.length) {
+				continue;
+			}
+
+			const row = {};
+			headers.forEach((h, idx) => {
+				row[h.trim()] = (cols[idx] || '').trim();
+			});
+
+			if (!row['_field'] || row['_value'] === undefined) {
+				continue;
+			}
+
+			results.push({
+				measurement: row['_measurement'] || 'unknown',
+				field: row['_field'],
+				value: isNaN(Number(row['_value'])) ? row['_value'] : Number(row['_value']),
+				unit: row['_unit'] || row['unit'] || '',
+				tag_device: row['device'] || row['name'] || '',
+			});
+		}
+
+		return results;
+	}
+
+	async ensureParentChannels(id) {
+		const parts = id.split('.');
+		for (let i = 1; i < parts.length; i++) {
+			const channelId = parts.slice(0, i).join('.');
+			const obj = await this.getObjectAsync(channelId);
+			if (!obj) {
+				await this.setObjectNotExistsAsync(channelId, {
+					type: 'channel',
+					common: { name: parts[i - 1] },
+					native: {},
+				});
+			}
+		}
+	}
+
+	async createOrUpdateState(id, value, unit) {
+		await this.ensureParentChannels(id);
+		const type = typeof value === 'number' ? 'number' : 'string';
+		await this.setObjectNotExistsAsync(id, {
 			type: 'state',
 			common: {
-				name: 'testVariable',
-				type: 'boolean',
-				role: 'indicator',
+				name: id.split('.').pop(),
+				type,
+				role: type === 'number' ? 'value' : 'text',
+				unit: unit || '',
 				read: true,
-				write: true,
+				write: false,
 			},
 			native: {},
 		});
-
-		// In order to get state updates, you need to subscribe to them. The following line adds a subscription for our variable we have created above.
-		this.subscribeStates('testVariable');
-		// You can also add a subscription for multiple states. The following line watches all states starting with "lights."
-		// this.subscribeStates('lights.*');
-		// Or, if you really must, you can also watch all states. Don't do this if you don't need to. Otherwise this will cause a lot of unnecessary load on the system:
-		// this.subscribeStates('*');
-
-		/*
-			setState examples
-			you will notice that each setState will cause the stateChange event to fire (because of above subscribeStates cmd)
-		*/
-		// the variable testVariable is set to true as command (ack=false)
-		await this.setState('testVariable', true);
-
-		// same thing, but the value is flagged "ack"
-		// ack should be always set to true if the value is received from or acknowledged from the target system
-		await this.setState('testVariable', { val: true, ack: true });
-
-		// same thing, but the state is deleted after 30s (getState will return null afterwards)
-		await this.setState('testVariable', { val: true, ack: true, expire: 30 });
-
-		// examples for the checkPassword/checkGroup functions
-		const pwdResult = await this.checkPasswordAsync('admin', 'iobroker');
-		this.log.info(`check user admin pw iobroker: ${pwdResult}`);
-
-		const groupResult = await this.checkGroupAsync('admin', 'admin');
-		this.log.info(`check group user admin group admin: ${groupResult}`);
+		await this.setStateAsync(id, { val: value, ack: true });
 	}
 
-	/**
-	 * Is called when adapter shuts down - callback has to be called under any circumstances!
-	 *
-	 * @param {() => void} callback - Callback function
-	 */
-	onUnload(callback) {
+	async syncInfluxToIoBroker(influxUrl, influxToken, influxOrg, fluxQuery) {
+		this.log.debug('InfluxDB-Sync gestartet...');
+
+		let rows;
 		try {
-			// Here you must clear all timeouts or intervals that may still be active
-			// clearTimeout(timeout1);
-			// clearTimeout(timeout2);
-			// ...
-			// clearInterval(interval1);
-
-			callback();
-		} catch (error) {
-			this.log.error(`Error during unloading: ${error.message}`);
-			callback();
+			rows = await this.queryInflux(influxUrl, influxToken, influxOrg, fluxQuery);
+		} catch (e) {
+			this.log.error(`InfluxDB-Abfrage fehlgeschlagen: ${e.message}`);
+			return;
 		}
-	}
 
-	// If you need to react to object changes, uncomment the following block and the corresponding line in the constructor.
-	// You also need to subscribe to the objects with `this.subscribeObjects`, similar to `this.subscribeStates`.
-	// /**
-	//  * Is called if a subscribed object changes
-	//  * @param {string} id
-	//  * @param {ioBroker.Object | null | undefined} obj
-	//  */
-	// onObjectChange(id, obj) {
-	// 	if (obj) {
-	// 		// The object was changed
-	// 		this.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
-	// 	} else {
-	// 		// The object was deleted
-	// 		this.log.info(`object ${id} deleted`);
-	// 	}
-	// }
+		if (!rows.length) {
+			this.log.warn('InfluxDB: Keine Datensätze zurückgegeben.');
+			return;
+		}
 
-	/**
-	 * Is called if a subscribed state changes
-	 *
-	 * @param {string} id - State ID
-	 * @param {ioBroker.State | null | undefined} state - State object
-	 */
-	onStateChange(id, state) {
-		if (state) {
-			// The state was changed
-			this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
-
-			if (state.ack === false) {
-				// This is a command from the user (e.g., from the UI or other adapter)
-				// and should be processed by the adapter
-				this.log.info(`User command received for ${id}: ${state.val}`);
-
-				// TODO: Add your control logic here
+		for (const row of rows) {
+			const sanitize = s => s.replace(/[^a-zA-Z0-9_-]/g, '_');
+			const nameParts = [sanitize(row.measurement)];
+			if (row.tag_device) {
+				nameParts.push(sanitize(row.tag_device));
 			}
-		} else {
-			// The object was deleted or the state value has expired
-			this.log.info(`state ${id} deleted`);
-		}
-	}
-	// If you need to accept messages in your adapter, uncomment the following block and the corresponding line in the constructor.
-	// /**
-	//  * Some message was sent to this instance over message box. Used by email, pushover, text2speech, ...
-	//  * Using this method requires "common.messagebox" property to be set to true in io-package.json
-	//  * @param {ioBroker.Message} obj
-	//  */
-	// onMessage(obj) {
-	// 	if (typeof obj === 'object' && obj.message) {
-	// 		if (obj.command === 'send') {
-	// 			// e.g. send email or pushover or whatever
-	// 			this.log.info('send command');
+			nameParts.push(sanitize(row.field));
 
-	// 			// Send response in callback if required
-	// 			if (obj.callback) this.sendTo(obj.from, obj.command, 'Message received', obj.callback);
-	// 		}
-	// 	}
-	// }
+			const dpId = nameParts.join('.');
+			await this.createOrUpdateState(dpId, row.value, row.unit);
+			this.log.debug(`Aktualisiert: ${dpId} = ${row.value} ${row.unit}`);
+		}
+
+		this.log.info(`InfluxDB-Sync abgeschlossen. ${rows.length} Datenpunkte aktualisiert.`);
+	}
 }
 
 if (require.main !== module) {
-	// Export the constructor in compact mode
-	/**
-	 * @param {Partial<utils.AdapterOptions>} [options] - Adapter options
-	 */
 	module.exports = options => new Enpal(options);
 } else {
-	// otherwise start the instance directly
 	new Enpal();
 }

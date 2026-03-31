@@ -1,5 +1,8 @@
-{
-	"enpal adapter settings": "Impostazioni dell'adattatore per enpal",
-	"option1": "opzione1",
-	"option2": "opzione2"
+﻿{
+    "enpal adapter settings":  "Impostazioni adattatore enpal",
+    "influx_url":  "URL InfluxDB",
+    "influx_token":  "Token API",
+    "influx_org":  "ID organizzazione",
+    "influx_bucket":  "Bucket",
+    "interval_ms":  "Intervallo di interrogazione (ms)"
 }

@@ -2,9 +2,30 @@
 	"i18n": true,
 	"type": "panel",
 	"items": {
-		"option1": {
-			"type": "checkbox",
-			"label": "option1",
+		"influx_url": {
+			"type": "text",
+			"label": "influx_url",
+			"newLine": true,
+			"default": "http://localhost:8086",
+			"xs": 12,
+			"sm": 12,
+			"md": 8,
+			"lg": 6,
+			"xl": 6
+		},
+		"influx_token": {
+			"type": "password",
+			"label": "influx_token",
+			"newLine": true,
+			"xs": 12,
+			"sm": 12,
+			"md": 8,
+			"lg": 6,
+			"xl": 6
+		},
+		"influx_org": {
+			"type": "text",
+			"label": "influx_org",
 			"newLine": true,
 			"xs": 12,
 			"sm": 12,
@@ -12,10 +33,22 @@
 			"lg": 4,
 			"xl": 4
 		},
-		"option2": {
+		"influx_bucket": {
 			"type": "text",
-			"label": "option2",
+			"label": "influx_bucket",
+			"newLine": false,
+			"xs": 12,
+			"sm": 12,
+			"md": 6,
+			"lg": 4,
+			"xl": 4
+		},
+		"interval_ms": {
+			"type": "number",
+			"label": "interval_ms",
 			"newLine": true,
+			"default": 60000,
+			"min": 5000,
 			"xs": 12,
 			"sm": 12,
 			"md": 6,

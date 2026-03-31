@@ -1,5 +1,8 @@
 {
 	"enpal adapter settings": "Adapterinstellingen voor enpal",
-	"option1": "optie1",
-	"option2": "optie2"
+	"influx_url": "InfluxDB URL",
+	"influx_token": "API-token",
+	"influx_org": "Organisatie-ID",
+	"influx_bucket": "Bucket",
+	"interval_ms": "Query-interval (ms)"
 }
