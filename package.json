@@ -13,7 +13,7 @@
     "solar",
     "enpal",
     "influxDB",
-    "iobroker",
+    "ioBroker",
     "adapter"
   ],
   "repository": {
