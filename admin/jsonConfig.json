@@ -12,41 +12,41 @@
 			"label": "influx_url",
 			"newLine": true,
 			"default": "http://localhost:8086",
-			"xs": 12,
-			"sm": 12,
-			"md": 12,
-			"lg": 12,
-			"xl": 12
+			"xs": 6,
+			"sm": 6,
+			"md": 6,
+			"lg": 6,
+			"xl": 6
 		},
 		"influx_token": {
 			"type": "password",
 			"label": "influx_token",
 			"newLine": true,
-			"xs": 12,
-			"sm": 12,
-			"md": 12,
-			"lg": 12,
-			"xl": 12
+			"xs": 6,
+			"sm": 6,
+			"md": 6,
+			"lg": 6,
+			"xl": 6
 		},
 		"influx_org": {
 			"type": "text",
 			"label": "influx_org",
 			"newLine": true,
-			"xs": 12,
-			"sm": 12,
-			"md": 12,
-			"lg": 12,
-			"xl": 12
+			"xs": 6,
+			"sm": 6,
+			"md": 6,
+			"lg": 6,
+			"xl": 6
 		},
 		"influx_bucket": {
 			"type": "text",
 			"label": "influx_bucket",
 			"newLine": true,
-			"xs": 12,
-			"sm": 12,
-			"md": 12,
-			"lg": 12,
-			"xl": 12
+			"xs": 6,
+			"sm": 6,
+			"md": 6,
+			"lg": 6,
+			"xl": 6
 		},
 		"interval_ms": {
 			"type": "number",
@@ -54,11 +54,11 @@
 			"newLine": true,
 			"default": 60000,
 			"min": 5000,
-			"xs": 12,
-			"sm": 12,
-			"md": 12,
-			"lg": 12,
-			"xl": 12
+			"xs": 6,
+			"sm": 6,
+			"md": 6,
+			"lg": 6,
+			"xl": 6
 		}
 	}
 }

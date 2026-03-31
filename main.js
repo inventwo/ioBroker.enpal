@@ -23,6 +23,8 @@ class Enpal extends utils.Adapter {
 		const influxBucket = this.config.influx_bucket || '';
 		const intervalMs = this.config.interval_ms || 60000;
 
+		await this.setState('info.connection', false, true);
+
 		if (!influxToken || !influxOrg || !influxBucket) {
 			this.log.error('InfluxDB-Konfiguration unvollständig. Bitte URL, Token, Org-ID und Bucket konfigurieren.');
 			return;
@@ -169,13 +171,17 @@ class Enpal extends utils.Adapter {
 			rows = await this.queryInflux(influxUrl, influxToken, influxOrg, fluxQuery);
 		} catch (e) {
 			this.log.error(`InfluxDB-Abfrage fehlgeschlagen: ${e.message}`);
+			await this.setState('info.connection', false, true);
 			return;
 		}
 
 		if (!rows.length) {
 			this.log.warn('InfluxDB: Keine Datensätze zurückgegeben.');
+			await this.setState('info.connection', false, true);
 			return;
 		}
+
+		await this.setState('info.connection', true, true);
 
 		for (const row of rows) {
 			const sanitize = s => s.replace(/[^a-zA-Z0-9_-]/g, '_');
