@@ -12,7 +12,9 @@
   "keywords": [
     "solar",
     "enpal",
-    "influcDB"
+    "influxDB",
+    "iobroker",
+    "adapter"
   ],
   "repository": {
     "type": "git",
