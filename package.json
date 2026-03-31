@@ -49,6 +49,9 @@
     "main.js"
   ],
   "scripts": {
+    "release-patch": "release-script patch --yes",
+    "release-minor": "release-script minor --yes",
+    "release-major": "release-script major --yes",
     "test:js": "mocha --config test/mocharc.custom.json \"{!(node_modules|test)/**/*.test.js,*.test.js,test/**/test!(PackageFiles|Startup).js}\"",
     "test:package": "mocha test/package --exit",
     "test:integration": "mocha test/integration --exit",
@@ -56,7 +59,6 @@
     "check": "tsc --noEmit -p tsconfig.check.json",
     "lint": "eslint -c eslint.config.mjs .",
     "translate": "translate-adapter",
-    "release": "release-script",
     "dev-server": "dev-server"
   },
   "bugs": {
