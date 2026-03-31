@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="75.867188" height="64.910156" viewBox="0 0 75.614297 64.910156" version="1.1" id="svg2" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+<svg width="76.867188" height="65.910156" viewBox="0 0 76.610964 65.910156" version="1.1" id="svg2" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
   <defs id="defs2" />
-  <g id="surface1" transform="translate(-3.0664061,-5.507812)">
-    <g id="g2">
-      <path style="fill:#052342;fill-opacity:1;fill-rule:nonzero;stroke:none" d="m 2.566406,5.507812 v 62.0625 H 48.242188 V 55.625 H 18.046875 V 42.613281 H 44.695312 V 30.464844 H 18.054688 V 17.457031 H 48.25 V 5.507812 Z" id="path1" />
-      <path style="fill:#ffb000;fill-opacity:1;fill-rule:nonzero;stroke:none" d="m 78.43359,58.695312 c 0,-6.472656 -5.23828,-11.722656 -11.69922,-11.722656 -6.46093,0 -11.69921,5.25 -11.69921,11.722656 0,6.476563 5.23828,11.722657 11.69921,11.722657 6.46094,0 11.69922,-5.246094 11.69922,-11.722657 z m 0,0" id="path2" />
+  <g id="surface1" style="stroke:white;stroke-opacity:1" transform="translate(-2.566406,-5.007812)">
+    <g id="g2" style="stroke:white;stroke-opacity:1">
+      <path style="fill:#052342;fill-opacity:1;fill-rule:nonzero;stroke:white;stroke-opacity:1" d="m 2.566406,5.507812 v 62.0625 H 48.242188 V 55.625 H 18.046875 V 42.613281 H 44.695312 V 30.464844 H 18.054688 V 17.457031 H 48.25 V 5.507812 Z" id="path1" />
+      <path style="fill:#ffb000;fill-opacity:1;fill-rule:nonzero;stroke:white;stroke-opacity:1" d="m 78.43359,58.695312 c 0,-6.472656 -5.23828,-11.722656 -11.69922,-11.722656 -6.46093,0 -11.69921,5.25 -11.69921,11.722656 0,6.476563 5.23828,11.722657 11.69921,11.722657 6.46094,0 11.69922,-5.246094 11.69922,-11.722657 z m 0,0" id="path2" />
     </g>
   </g>
 </svg>
