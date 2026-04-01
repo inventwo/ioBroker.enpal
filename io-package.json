@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "enpal",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "news": {
+      "0.1.2": {
+        "en": "Fixed: [E1040] width and height of logo",
+        "de": "Befestigt: [E1040] Breite und Höhe des Logos",
+        "ru": "Фиксированный: [E1040] ширина и высота логотипа",
+        "pt": "Fixação: [E1040] largura e altura do logotipo",
+        "nl": "Vaste: [E1040] breedte en hoogte van het logo",
+        "fr": "Fixé: [E1040] largeur et hauteur du logo",
+        "it": "Fisso: [E1040] larghezza e altezza del logo",
+        "es": "Fijo: [E1040] ancho y altura de logotipo",
+        "pl": "Naprawiono: [E1040] szerokość i wysokość logo",
+        "uk": "Виправлено: [E1040] ширина і висота логотипу",
+        "zh-cn": "固定:[E1040] 标志的宽度和高度"
+      },
       "0.1.1": {
         "en": "Fixed: Logoname",
         "de": "Behoben: Logoname",

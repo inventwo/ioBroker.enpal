@@ -75,7 +75,7 @@ Typical examples (depending on your inverter and Enpal configuration):
 <!--
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.1.2 (2026-04-01)
 - (skvarel) Fixed: [E1040] width and height of logo
 
 ### 0.1.1 (2026-03-31)
