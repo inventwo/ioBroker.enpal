@@ -1,9 +1,9 @@
 'use strict';
 
 const utils = require('@iobroker/adapter-core');
-const http = require('http');
-const https = require('https');
-const { URL } = require('url');
+const http = require('node:http');
+const https = require('node:https');
+const { URL } = require('node:url');
 
 class Enpal extends utils.Adapter {
 	constructor(options) {
