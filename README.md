@@ -75,6 +75,9 @@ Typical examples (depending on your inverter and Enpal configuration):
 <!--
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (skvarel) Add 7-day cooldown for npm dependencies in Dependabot config (security improvement)
+
 ### 0.1.3 (2026-04-01)
 - (skvarel) Use node: prefix for built-in Node.js modules (http, https, url, path)
 
