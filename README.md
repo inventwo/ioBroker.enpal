@@ -75,7 +75,7 @@ Typical examples (depending on your inverter and Enpal configuration):
 <!--
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.1.5 (2026-04-01)
 - (skvarel) Changed interval configuration from milliseconds to seconds for better usability
 
 ### 0.1.4 (2026-04-01)
@@ -89,9 +89,6 @@ Typical examples (depending on your inverter and Enpal configuration):
 
 ### 0.1.1 (2026-03-31)
 - (skvarel) Fixed: Logoname
-
-### 0.1.0 (2026-03-31)
-- (skvarel) initial release
 
 ## License
 MIT License

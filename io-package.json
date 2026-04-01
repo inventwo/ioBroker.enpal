@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "enpal",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "news": {
+      "0.1.5": {
+        "en": "Changed interval configuration from milliseconds to seconds for better usability",
+        "de": "Änderte Intervallkonfiguration von Millisekunden auf Sekunden für bessere Bedienbarkeit",
+        "ru": "Изменение конфигурации интервала от миллисекунд до секунд для лучшего удобства использования",
+        "pt": "Configuração do intervalo alterada de milissegundos para segundos para uma melhor usabilidade",
+        "nl": "Veranderde intervalconfiguratie van milliseconden naar seconden voor een betere bruikbaarheid",
+        "fr": "Configuration de l'intervalle modifié de millisecondes à secondes pour une meilleure convivialité",
+        "it": "Modificata la configurazione dell'intervallo da millisecondi a secondi per una migliore usabilità",
+        "es": "Modificar la configuración de intervalos de milisegundos a segundos para una mejor usabilidad",
+        "pl": "Zmieniona konfiguracja interwałów z milisekund na sekundy dla lepszej użyteczności",
+        "uk": "Зміна конфігурації інтервалу від мілісекундів до секунд для кращої зручності",
+        "zh-cn": "将间隔配置从毫秒更改为秒, 以提高可用性"
+      },
       "0.1.4": {
         "en": "Add 7-day cooldown for npm dependencies in Dependabot config (security improvement)",
         "de": "7-Tage-Abklingzeit für npm-Abhängigkeiten in Dependabot config (Sicherheitsverbesserung)",
