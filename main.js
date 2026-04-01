@@ -21,7 +21,7 @@ class Enpal extends utils.Adapter {
 		const influxToken = this.config.influx_token || '';
 		const influxOrg = this.config.influx_org || '';
 		const influxBucket = this.config.influx_bucket || '';
-		const intervalMs = this.config.interval_ms || 60000;
+		const intervalS = this.config.interval_s || 60;
 
 		await this.setState('info.connection', false, true);
 
@@ -37,7 +37,7 @@ class Enpal extends utils.Adapter {
 		};
 
 		await sync();
-		this.syncInterval = this.setInterval(sync, intervalMs);
+		this.syncInterval = this.setInterval(sync, intervalS * 1000);
 	}
 
 	onUnload(callback) {

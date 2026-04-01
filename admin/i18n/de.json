@@ -4,5 +4,5 @@
 	"influx_token": "API-Token",
 	"influx_org": "Organisations-ID",
 	"influx_bucket": "Bucket",
-	"interval_ms": "Abfrage-Intervall (ms)"
+	"interval_s": "Abfrage-Intervall (s)"
 }

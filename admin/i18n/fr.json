@@ -4,5 +4,5 @@
 	"influx_token": "Jeton API",
 	"influx_org": "ID d'organisation",
 	"influx_bucket": "Bucket",
-	"interval_ms": "Intervalle d'interrogation (ms)"
+	"interval_s": "Intervalle d'interrogation (s)"
 }

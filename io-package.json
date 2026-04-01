@@ -151,7 +151,7 @@
     "influx_token": "",
     "influx_org": "",
     "influx_bucket": "",
-    "interval_ms": 60000
+    "interval_s": 60
   },
   "protectedNative": [
     "influx_token"

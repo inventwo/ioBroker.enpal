@@ -4,5 +4,5 @@
     "influx_token":  "Token API",
     "influx_org":  "ID organizzazione",
     "influx_bucket":  "Bucket",
-    "interval_ms":  "Intervallo di interrogazione (ms)"
+    "interval_s":  "Intervallo di interrogazione (s)"
 }

@@ -11,7 +11,7 @@
 
 ## What this adapter does
 
-Reads real-time energy data from the local InfluxDB 2.x instance provided by Enpal solar systems and exposes ioBroker states for home automation:
+Reads energy data from the local InfluxDB 2.x instance provided by Enpal solar systems and exposes ioBroker states for home automation:
 
 - Monitor solar power production in real-time
 - Track battery state of charge (SoC)
@@ -55,7 +55,7 @@ Typical examples (depending on your inverter and Enpal configuration):
    - **API Token**: Your InfluxDB API token (read access is sufficient)
    - **Organisation ID**: Your InfluxDB organisation
    - **Bucket**: The bucket Enpal writes to (typically `enpal` or similar)
-   - **Update Interval**: Data refresh interval in milliseconds (default: `60000`)
+   - **Update Interval**: Data refresh interval in seconds (default: `60`)
 4. Save and start the instance
 
 ### How to find your InfluxDB credentials
@@ -75,6 +75,9 @@ Typical examples (depending on your inverter and Enpal configuration):
 <!--
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (skvarel) Changed interval configuration from milliseconds to seconds for better usability
+
 ### 0.1.4 (2026-04-01)
 - (skvarel) Add 7-day cooldown for npm dependencies in Dependabot config (security improvement)
 

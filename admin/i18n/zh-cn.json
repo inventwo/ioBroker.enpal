@@ -4,5 +4,5 @@
     "influx_token":  "API 令牌",
     "influx_org":  "组织 ID",
     "influx_bucket":  "Bucket",
-    "interval_ms":  "查询间隔（毫秒）"
+    "interval_s":  "查询间隔（秒）"
 }
