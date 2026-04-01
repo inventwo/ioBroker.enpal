@@ -1,8 +1,9 @@
 {
-    "enpal adapter settings":  "Configurações do adaptador enpal",
-    "influx_url":  "URL do InfluxDB",
-    "influx_token":  "Token de API",
-    "influx_org":  "ID da organização",
-    "influx_bucket":  "Bucket",
-    "interval_s":  "Intervalo de consulta (s)"
+	"enpal adapter settings": "Configurações do adaptador enpal",
+	"influx_bucket": "Bucket",
+	"influx_org": "ID da organização",
+	"influx_token": "Token de API",
+	"influx_url": "URL do InfluxDB",
+	"interval_s": "Intervalo de consulta (s)",
+	"show_sync_info": "Mostrar mensagens informativas para cada sincronização"
 }

@@ -196,7 +196,9 @@ class Enpal extends utils.Adapter {
 			this.log.debug(`Updated: ${dpId} = ${row.value} ${row.unit}`);
 		}
 
-		this.log.info(`InfluxDB sync completed. ${rows.length} data points updated.`);
+		if (this.config.show_sync_info) {
+			this.log.info(`InfluxDB sync completed. ${rows.length} data points updated.`);
+		}
 	}
 }
 

@@ -13,11 +13,11 @@
 
 Reads energy data from the local InfluxDB 2.x instance provided by Enpal solar systems and exposes ioBroker states for home automation:
 
-- Monitor solar power production in real-time
+- Monitor solar power production
 - Track battery state of charge (SoC)
 - Analyze grid consumption and feed-in power
 - Automate based on power generation
-- Visualize energy flows in ioBroker dashboards
+- Visualize energy flows in ioBroker dashboard
 
 ## Features
 
@@ -75,6 +75,9 @@ Typical examples (depending on your inverter and Enpal configuration):
 <!--
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (skvarel) Added configurable option to show/hide InfluxDB sync info messages
+
 ### 0.1.5 (2026-04-01)
 - (skvarel) Changed interval configuration from milliseconds to seconds for better usability
 

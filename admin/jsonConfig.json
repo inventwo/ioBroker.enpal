@@ -59,6 +59,17 @@
 			"md": 6,
 			"lg": 6,
 			"xl": 6
+		},
+		"show_sync_info": {
+			"type": "checkbox",
+			"label": "show_sync_info",
+			"newLine": true,
+			"default": false,
+			"xs": 12,
+			"sm": 6,
+			"md": 6,
+			"lg": 6,
+			"xl": 6
 		}
 	}
 }

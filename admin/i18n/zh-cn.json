@@ -1,8 +1,9 @@
 {
-    "enpal adapter settings":  "enpal 适配器设置",
-    "influx_url":  "InfluxDB URL",
-    "influx_token":  "API 令牌",
-    "influx_org":  "组织 ID",
-    "influx_bucket":  "Bucket",
-    "interval_s":  "查询间隔（秒）"
+	"enpal adapter settings": "enpal 适配器设置",
+	"influx_bucket": "Bucket",
+	"influx_org": "组织 ID",
+	"influx_token": "API 令牌",
+	"influx_url": "InfluxDB URL",
+	"interval_s": "查询间隔（秒）",
+	"show_sync_info": "显示每次同步的信息消息"
 }
