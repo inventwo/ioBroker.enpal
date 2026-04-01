@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "enpal",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "news": {
+      "0.1.4": {
+        "en": "Add 7-day cooldown for npm dependencies in Dependabot config (security improvement)",
+        "de": "7-Tage-Abklingzeit für npm-Abhängigkeiten in Dependabot config (Sicherheitsverbesserung)",
+        "ru": "Добавить 7-дневное охлаждение для зависимостей npm в конфигурации Dependabot (улучшение безопасности)",
+        "pt": "Adicione resfriamento de 7 dias para dependências do npm na configuração de Dependabot (melhoria de segurança)",
+        "nl": "7-daagse cooldown toevoegen voor npm afhankelijkheden in Dependabot configuratie (veiligheidsverbetering)",
+        "fr": "Ajouter 7 jours de refroidissement pour les dépendances npm dans la configuration de Dependabot (amélioration de la sécurité)",
+        "it": "Aggiungi 7 giorni di raffreddamento per le dipendenze npm in Dependabot config (miglioramento della sicurezza)",
+        "es": "Añadir refrigeración de 7 días para las dependencias de npm en el config de Dependabot (mejoramiento de seguridad)",
+        "pl": "Dodaj 7-dniowe ochłodzenie dla zależności npm w konfiguracji Dependabot (poprawa bezpieczeństwa)",
+        "uk": "Додавання 7-денного охолодження для npm залежностей в налаштуваннях залежностей",
+        "zh-cn": "对依赖配置中的 npm 依赖性增加7天冷却( 安全性改进)"
+      },
       "0.1.3": {
         "en": "Use node: prefix for built-in Node.js modules (http, https, url, path)",
         "de": "Verwendungsknoten: Präfix für integrierte Node.js-Module (http, https, url, path)",
