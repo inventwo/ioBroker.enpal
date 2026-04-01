@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "enpal",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "news": {
+      "0.1.3": {
+        "en": "Use node: prefix for built-in Node.js modules (http, https, url, path)",
+        "de": "Verwendungsknoten: Präfix für integrierte Node.js-Module (http, https, url, path)",
+        "ru": "Узел использования: префикс для встроенных модулей Node.js (http, https, url, path)",
+        "pt": "Nó de uso: prefixo para módulos Node.js incorporados (http, https, url, path)",
+        "nl": "Gebruik knooppunt: voorvoegsel voor ingebouwde Node.js modules (http, https, url, pad)",
+        "fr": "Utiliser noeud: préfixe pour modules Node.js intégrés (http, https, url, chemin)",
+        "it": "Nodo d'uso: prefisso per moduli Node.js integrati (http, https, url, path)",
+        "es": "Nodo de uso: prefijo para módulos Node.js incorporados (http, https, url, path)",
+        "pl": "Use node: prefix for built- in Node.js modules (http, https, url, path)",
+        "uk": "Використовуйте вузол: префікс для вбудованих модулів Node.js (http, HTTPS, url, path)",
+        "zh-cn": "使用节点:内建节点.js模块的前缀(http, https, url, path)"
+      },
       "0.1.2": {
         "en": "Fixed: [E1040] width and height of logo",
         "de": "Befestigt: [E1040] Breite und Höhe des Logos",
