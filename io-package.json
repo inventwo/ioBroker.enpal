@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "enpal",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "news": {
+      "0.1.6": {
+        "en": "Added configurable option to show/hide InfluxDB sync info messages",
+        "de": "Konfigurierbare Option hinzugefügt, um InfluxDB Sync-Info-Nachrichten anzuzeigen/hide",
+        "ru": "Добавлена настраиваемая опция для отображения/скрытия сообщений синхронизации InfluxDB",
+        "pt": "Adicionada opção configurável para mostrar/esconder mensagens de informação de sincronização do InfluxDB",
+        "nl": "Toegevoegd configureerbare optie om InfluxDB sync infoberichten te tonen/verbergen",
+        "fr": "Ajout de l'option configurable pour afficher/masquer les messages d'info de synchronisation InfluxDB",
+        "it": "Aggiunta l'opzione configurabile per mostrare/hide InfluxDB sincronizzare i messaggi info",
+        "es": "Añadido opción configurable para mostrar/hierro InfluxDB sincronización de mensajes",
+        "pl": "Dodano konfigurowalną opcję wyświetlania / ukrywania komunikatów informacyjnych synchronizacji InfluxDB",
+        "uk": "Додано налаштування параметра для відображення/hide InfluxDB sync повідомлень",
+        "zh-cn": "添加可配置选项以显示/ hide InfluxDB 同步信息消息"
+      },
       "0.1.5": {
         "en": "Changed interval configuration from milliseconds to seconds for better usability",
         "de": "Änderte Intervallkonfiguration von Millisekunden auf Sekunden für bessere Bedienbarkeit",
@@ -80,19 +93,6 @@
         "pl": "początkowe zwolnienie",
         "uk": "початковий реліз",
         "zh-cn": "初步释放"
-      },
-      "0.0.1": {
-        "en": "initial release",
-        "de": "Erstveröffentlichung",
-        "ru": "Начальная версия",
-        "pt": "lançamento inicial",
-        "nl": "Eerste uitgave",
-        "fr": "Première version",
-        "it": "Versione iniziale",
-        "es": "Versión inicial",
-        "pl": "Pierwsze wydanie",
-        "uk": "Початкова версія",
-        "zh-cn": "首次出版"
       }
     },
     "titleLang": {
