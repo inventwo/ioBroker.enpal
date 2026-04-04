@@ -75,7 +75,7 @@ Typical examples (depending on your inverter and Enpal configuration):
 <!--
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.1.7 (2026-04-04)
 - (skvarel) Title and description edited
 
 ### 0.1.6 (2026-04-01)
