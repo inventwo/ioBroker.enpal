@@ -1,21 +1,8 @@
 {
   "common": {
     "name": "enpal",
-    "version": "0.1.7",
+    "version": "0.1.6",
     "news": {
-      "0.1.7": {
-        "en": "Title and description edited",
-        "de": "Titel und Beschreibung bearbeitet",
-        "ru": "Название и описание отредактированы",
-        "pt": "Título e descrição editados",
-        "nl": "Titel en beschrijving bewerkt",
-        "fr": "Titre et description édités",
-        "it": "Titolo e descrizione a cura",
-        "es": "Título y descripción editados",
-        "pl": "Tytuł i opis edytowany",
-        "uk": "Назва та опис редаговані",
-        "zh-cn": "标题和说明已编辑"
-      },
       "0.1.6": {
         "en": "Added configurable option to show/hide InfluxDB sync info messages",
         "de": "Konfigurierbare Option hinzugefügt, um InfluxDB Sync-Info-Nachrichten anzuzeigen/hide",
