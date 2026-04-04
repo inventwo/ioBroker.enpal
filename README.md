@@ -72,6 +72,10 @@ Typical examples (depending on your inverter and Enpal configuration):
 - No external servers are contacted
 
 ## Changelog
+
+### **WORK IN PROGRESS**
+- (skvarel) Fix prettier formatting in main.js
+
 ### 0.1.9 (2026-04-04)
 - (skvarel) Update node version to 24.x for check-and-lint workflow
 
