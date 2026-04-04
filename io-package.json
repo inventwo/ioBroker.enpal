@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "enpal",
-    "version": "0.1.7",
+    "version": "0.1.6",
     "news": {
       "0.1.6": {
         "en": "Added configurable option to show/hide InfluxDB sync info messages",
