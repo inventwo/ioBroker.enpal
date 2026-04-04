@@ -72,8 +72,7 @@ Typical examples (depending on your inverter and Enpal configuration):
 - No external servers are contacted
 
 ## Changelog
-
-### **WORK IN PROGRESS**
+### 0.1.10 (2026-04-04)
 - (skvarel) Fix prettier formatting in main.js
 
 ### 0.1.9 (2026-04-04)
@@ -87,9 +86,6 @@ Typical examples (depending on your inverter and Enpal configuration):
 
 ### 0.1.6 (2026-04-01)
 - (skvarel) Added configurable option to show/hide InfluxDB sync info messages
-
-### 0.1.5 (2026-04-01)
-- (skvarel) Changed interval configuration from milliseconds to seconds for better usability
 
 ## License
 MIT License

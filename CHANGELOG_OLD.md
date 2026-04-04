@@ -1,4 +1,7 @@
 # Older changes
+## 0.1.5 (2026-04-01)
+- (skvarel) Changed interval configuration from milliseconds to seconds for better usability
+
 ## 0.1.4 (2026-04-01)
 - (skvarel) Add 7-day cooldown for npm dependencies in Dependabot config (security improvement)
 
