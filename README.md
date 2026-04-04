@@ -72,8 +72,7 @@ Typical examples (depending on your inverter and Enpal configuration):
 - No external servers are contacted
 
 ## Changelog
-
-### **WORK IN PROGRESS**
+### 0.1.9 (2026-04-04)
 - (skvarel) Update node version to 24.x for check-and-lint workflow
 
 ### 0.1.8 (2026-04-04)
@@ -87,9 +86,6 @@ Typical examples (depending on your inverter and Enpal configuration):
 
 ### 0.1.5 (2026-04-01)
 - (skvarel) Changed interval configuration from milliseconds to seconds for better usability
-
-### 0.1.4 (2026-04-01)
-- (skvarel) Add 7-day cooldown for npm dependencies in Dependabot config (security improvement)
 
 ## License
 MIT License

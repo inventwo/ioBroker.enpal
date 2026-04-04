@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "enpal",
-    "version": "0.1.8",
+    "version": "0.1.9",
     "news": {
+      "0.1.9": {
+        "en": "Update node version to 24.x for check-and-lint workflow",
+        "de": "Aktualisieren Sie Knotenversion auf 24,x für den Check-and-lint-Workflow",
+        "ru": "Обновление узловой версии до 24.x для чек-энд-линт рабочего процесса",
+        "pt": "Atualizar a versão do nó para 24.x para o fluxo de trabalho check-and-lint",
+        "nl": "Update node versie naar 24.x voor check-and-lint workflow",
+        "fr": "Mettre à jour la version node à 24.x pour vérifier et lint workflow",
+        "it": "Aggiorna la versione nodo a 24.x per il flusso di lavoro check-and-lint",
+        "es": "Actualizar la versión del nodo a 24.x para el flujo de trabajo de check-and-lint",
+        "pl": "Aktualizuj wersję węzła do 24.x dla przepływu pracy check- and- lint",
+        "uk": "Оновлення версії вузла до 24.x для зворотного зв'язку",
+        "zh-cn": "将节点版本更新为 24.x 用于检查和lint 工作流程"
+      },
       "0.1.8": {
         "en": "Fixed display of unit \"None\" in data points - now hidden for cleaner UI",
         "de": "Feste Anzeige der Einheit \"None\" in Datenpunkten - jetzt für sauberer UI versteckt",
@@ -80,19 +93,6 @@
         "pl": "Use node: prefix for built- in Node.js modules (http, https, url, path)",
         "uk": "Використовуйте вузол: префікс для вбудованих модулів Node.js (http, HTTPS, url, path)",
         "zh-cn": "使用节点:内建节点.js模块的前缀(http, https, url, path)"
-      },
-      "0.1.2": {
-        "en": "Fixed: [E1040] width and height of logo",
-        "de": "Befestigt: [E1040] Breite und Höhe des Logos",
-        "ru": "Фиксированный: [E1040] ширина и высота логотипа",
-        "pt": "Fixação: [E1040] largura e altura do logotipo",
-        "nl": "Vaste: [E1040] breedte en hoogte van het logo",
-        "fr": "Fixé: [E1040] largeur et hauteur du logo",
-        "it": "Fisso: [E1040] larghezza e altezza del logo",
-        "es": "Fijo: [E1040] ancho y altura de logotipo",
-        "pl": "Naprawiono: [E1040] szerokość i wysokość logo",
-        "uk": "Виправлено: [E1040] ширина і висота логотипу",
-        "zh-cn": "固定:[E1040] 标志的宽度和高度"
       }
     },
     "titleLang": {

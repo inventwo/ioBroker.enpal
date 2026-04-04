@@ -1,4 +1,7 @@
 # Older changes
+## 0.1.4 (2026-04-01)
+- (skvarel) Add 7-day cooldown for npm dependencies in Dependabot config (security improvement)
+
 ## 0.1.3 (2026-04-01)
 - (skvarel) Use node: prefix for built-in Node.js modules (http, https, url, path)
 
