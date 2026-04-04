@@ -72,9 +72,10 @@ Typical examples (depending on your inverter and Enpal configuration):
 - No external servers are contacted
 
 ## Changelog
-<!--
-	### **WORK IN PROGRESS**
--->
+
+### **WORK IN PROGRESS**
+- (skvarel) Update node version to 24.x for check-and-lint workflow
+
 ### 0.1.8 (2026-04-04)
 - (skvarel) Fixed display of unit "None" in data points - now hidden for cleaner UI
 
