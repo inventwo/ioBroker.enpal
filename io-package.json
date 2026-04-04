@@ -96,30 +96,30 @@
       }
     },
     "titleLang": {
-      "en": "ENPAL Integration",
-      "de": "ENPAL-Integration",
-      "ru": "Интеграция ENPAL",
-      "pt": "Integração ENPAL",
-      "nl": "ENPAL-integratie",
-      "fr": "Intégration ENPAL",
-      "it": "Integrazione ENPAL",
-      "es": "Integración ENPAL",
-      "pl": "Integracja z ENPAL-em",
-      "uk": "Інтеграція ENPAL",
-      "zh-cn": "ENPAL 整合"
+      "en": "Enpal AC-Box Integration",
+      "de": "Enpal AC-Box Integration",
+      "ru": "Интеграция Enpal AC-Box",
+      "pt": "Integração Enpal AC-Box",
+      "nl": "Enpal AC-Box Integratie",
+      "fr": "Intégration Enpal AC-Box",
+      "it": "Integrazione Enpal AC-Box",
+      "es": "Integración Enpal AC-Box",
+      "pl": "Integracja z Enpal AC-Box",
+      "uk": "Інтеграція Enpal AC-Box",
+      "zh-cn": "Enpal AC-Box 整合"
     },
     "desc": {
-      "en": "ENPAL InfluxDB",
-      "de": "ENPAL InfluxDB",
-      "ru": "ENPAL InfluxDB",
-      "pt": "ENPAL InfluxDB",
-      "nl": "ENPAL InfluxDB",
-      "fr": "ENPAL InfluxDB",
-      "it": "ENPAL DB Afflussi",
-      "es": "ENPAL InfluxDB",
-      "pl": "ENPAL InfluxDB",
-      "uk": "ENPAL InfluxDB",
-      "zh-cn": "ENPAL InfluxDB"
+      "en": "Reads the energy data from the local InfluxDB 2.x database of Enpal Solar Systems and provides the information as individual data points.",
+      "de": "Liest die Energiedaten aus der lokalen InfluxDB 2.x-Datenbank von Enpal Solar Systems und stellt die Informationen als einzelne Datenpunkte bereit.",
+      "ru": "Программа считывает данные об энергопотреблении из локальной базы данных InfluxDB 2.x компании Enpal Solar Systems и предоставляет информацию в виде отдельных точек данных.",
+      "pt": "Lê os dados de energia do banco de dados local InfluxDB 2.x da Enpal Solar Systems e fornece as informações como pontos de dados individuais.",
+      "nl": "Leest de energiegegevens uit de lokale InfluxDB 2.x-database van Enpal Solar Systems en presenteert de informatie als afzonderlijke datapunten.",
+      "fr": "Lit les données énergétiques de la base de données locale InfluxDB 2.x d'Enpal Solar Systems et fournit les informations sous forme de points de données individuels.",
+      "it": "Legge i dati energetici dal database locale InfluxDB 2.x di Enpal Solar Systems e fornisce le informazioni come singoli punti dati.",
+      "es": "Lee los datos de energía de la base de datos local InfluxDB 2.x de Enpal Solar Systems y proporciona la información como puntos de datos individuales.",
+      "pl": "Odczytuje dane dotyczące energii z lokalnej bazy danych InfluxDB 2.x firmy Enpal Solar Systems i udostępnia informacje w postaci indywidualnych punktów danych.",
+      "uk": "Зчитує дані про енергію з локальної бази даних InfluxDB 2.x компанії Enpal Solar Systems та надає інформацію у вигляді окремих точок даних.",
+      "zh-cn": "从 Enpal Solar Systems 的本地 InfluxDB 2.x 数据库中读取能源数据，并将信息作为单独的数据点提供。"
     },
     "authors": [
       "skvarel <skvarel@inventwo.com>"
