@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "enpal",
-    "version": "0.1.7",
+    "version": "0.1.8",
     "news": {
+      "0.1.8": {
+        "en": "Fixed display of unit \"None\" in data points - now hidden for cleaner UI",
+        "de": "Feste Anzeige der Einheit \"None\" in Datenpunkten - jetzt für sauberer UI versteckt",
+        "ru": "Фиксированный дисплей блока «Никто» в точках данных — теперь скрыт для более чистого пользовательского интерфейса",
+        "pt": "Visualização fixa da unidade \"Nenhum\" em pontos de dados - agora oculto para UI limpa",
+        "nl": "Vaste weergave van eenheid \"Geen\" in datapunten - nu verborgen voor schonere UI",
+        "fr": "Affichage fixe de l'unité \"Aucun\" dans les points de données - maintenant caché pour l'interface utilisateur plus propre",
+        "it": "Display fisso dell'unità \"Nessuno\" nei punti di dati - ora nascosto per l'interfaccia utente più pulita",
+        "es": "Pantalla fija de unidad \"None\" en puntos de datos - ahora oculto para UI limpiador",
+        "pl": "Stałe wyświetlanie jednostki \"Brak\" w punktach danych - teraz ukryte dla czystszego interfejsu",
+        "uk": "Фіксований дисплей блоку \"Нон\" в точках даних - тепер прихований для очищення UI",
+        "zh-cn": "在数据点中固定显示单位“ 无” - 现在隐藏用于更清洁的UI"
+      },
       "0.1.7": {
         "en": "Title and description edited",
         "de": "Titel und Beschreibung bearbeitet",
@@ -80,19 +93,6 @@
         "pl": "Naprawiono: [E1040] szerokość i wysokość logo",
         "uk": "Виправлено: [E1040] ширина і висота логотипу",
         "zh-cn": "固定:[E1040] 标志的宽度和高度"
-      },
-      "0.1.1": {
-        "en": "Fixed: Logoname",
-        "de": "Behoben: Logoname",
-        "ru": "Исправлено: Logoname",
-        "pt": "Corrigido: Logoname",
-        "nl": "Vast: Logonaam",
-        "fr": "Correction : nom de logo",
-        "it": "Fisso: Logoname",
-        "es": "Corregido: Nombre de logotipo",
-        "pl": "Naprawiono: nazwa logowania",
-        "uk": "Виправлено: Логотип",
-        "zh-cn": "固定: 标记名称"
       }
     },
     "titleLang": {
