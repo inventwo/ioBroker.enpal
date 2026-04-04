@@ -75,6 +75,9 @@ Typical examples (depending on your inverter and Enpal configuration):
 <!--
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (skvarel) Fixed display of unit "None" in data points - now hidden for cleaner UI
+
 ### 0.1.7 (2026-04-04)
 - (skvarel) Title and description edited
 

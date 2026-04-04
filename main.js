@@ -154,7 +154,7 @@ class Enpal extends utils.Adapter {
 				name: id.split('.').pop(),
 				type,
 				role: type === 'number' ? 'value' : 'text',
-				unit: unit || '',
+				unit: (unit && unit !== 'None') ? unit : '',
 				read: true,
 				write: false,
 			},
