@@ -3,10 +3,10 @@
 	"type": "panel",
 	"items": {
 		"_info": {
-            "type": "header",
-            "text": "ENPAL InfluxDB Configuration",
-            "size": 3
-        },
+			"type": "header",
+			"text": "ENPAL InfluxDB Configuration",
+			"size": 3
+		},
 		"influx_url": {
 			"type": "text",
 			"label": "influx_url",

@@ -9,7 +9,7 @@
 
 [![COMMUNITY](https://img.shields.io/badge/community%20-ioBroker%20|%20forum-blue.svg)](https://forum.iobroker.net/topic/84188/enpal-influxdb-integration)
 [![MAINTAINER](https://img.shields.io/badge/maintainer-skvarel%20@%20inventwo-yellowgreen.svg)](https://github.com/skvarel)
-[![AI](https://img.shields.io/badge/ai%20assisted-copilot-blue.svg)](https://github.com/inventwo/ioBroker.enpal/blob/main/.github/copilot-instructions.md)
+[![AI](https://img.shields.io/badge/ai%20assisted-cursor-blue.svg)](https://github.com/inventwo/ioBroker.enpal/tree/main/.cursor/rules)
 
 [![Paypal Donation](https://img.shields.io/badge/paypal-donate%20|%20spenden-green.svg)](https://www.paypal.com/donate/?hosted_button_id=7W6M3TFZ4W9LW)
 
@@ -81,6 +81,12 @@ Typical examples (depending on your inverter and Enpal configuration):
 <!--
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (skvarel) Migrated project rules from GitHub Copilot to Cursor rules
+- (skvarel) Updated @alcalzone/release-script to 5.2.1 to fix repository checker error E0036
+- (skvarel) Updated @tsconfig/node22 to 22.0.5
+- (skvarel) Fixed mixed indentation in admin/jsonConfig.json
+
 ### 0.2.1 (2026-05-25)
 - (skvarel) Added link to CHANGELOG_OLD.md at readme 
 - (skvarel) Updated @alcalzone/release-script and related plugins
