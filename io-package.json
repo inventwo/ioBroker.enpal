@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "enpal",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "news": {
+      "0.2.2": {
+        "en": "Migrated project rules from GitHub Copilot to Cursor rules\nUpdated @alcalzone/release-script to 5.2.1 to fix repository checker error E0036\nUpdated @tsconfig/node22 to 22.0.5\nFixed mixed indentation in admin/jsonConfig.json",
+        "de": "Geförderte Projektregeln von GitHub Copilot zu Cursor-Regeln\nAktualisiert @alcalzone/Release-script auf 5.2.1, um Repository-Checker-Fehler E0036 zu beheben\nAktualisiert @tsconfig/node22 bis 22.0.5\nFeste gemischte Eindrücke in admin/jsonConfig.json",
+        "ru": "Миграционные правила проекта от GitHub Copilot до Cursor\nОбновлен @alcalzone/release-script до 5.2.1 для исправления ошибки проверки хранилища E0036\nОбновленный @tsconfig/node22 до 22.0.5\nФиксированная смешанная вставка в admin/jsonConfig.json",
+        "pt": "Regras de projeto modificadas do Copiloto GitHub para as regras do Cursor\nAtualizado @alcalzone/release-script para 5.2.1 para corrigir o erro de verificação do repositório E0036\nAtualizado @tsconfig/node22 para 22.0.5\nIndentação mista fixa em admin/jsonConfig.json",
+        "nl": "Migrated project regels van GitHub Copilot naar Cursor regels\nBijgewerkt @alcalzone/release-script naar 5.2.1 om repository-checkerfout E0036 te herstellen\nBijgewerkt @tsconfig/node22 tot 220,5\nVaste gemengde inspringing in admin/jsonConfig.json",
+        "fr": "Règles de projet modifiées du copilote GitHub aux règles Cursor\nMise à jour @alcalzone/release-script au 5.2.1 pour corriger l'erreur de vérification du dépôt E0036\nActualisé @tsconfig/node22 à 220,5\nCorrection de l'indentation mixte dans admin/jsonConfig.json",
+        "it": "Regole di progetto migrate da GitHub Copilot a regole Cursor\nAggiornato @alcalzone/release-script a 5.2.1 per correggere l'errore di checker del repository E0036\nAggiornato @tsconfig/node22 a 22.0.5\nIndentazione mista fissa in admin/jsonConfig.json",
+        "es": "Migrated project rules from GitHub Copilot to Cursor rules\nActualizado @alcalzone/release-script a 5.2.1 para corregir el error del repositorio E0036\nActualizado @tsconfig/node22 a 22.0.5\nIndentación mixta fija en admin/jsonConfig.json",
+        "pl": "Migrowane zasady projektu z GitHub Copilot do zasad kursora\nAktualizacja @ alcalzone / release- script do 5.2.1, aby naprawić błąd kontrolera repozytorium E0036\nAktualizacja @ tsconfig / node22 do 22.0.5\nNaprawiono wcięcie mieszane w admin / jsonConfig.json",
+        "uk": "Миттєві правила проекту від GitHub Copilot до правил Cursor\nОновлено @alcalzone/видання до 5.2.1, щоб виправити помилки репозиторій\nОновлено @tsconfig/node22 до 22.0.5\nФіксований змішаний відступ в адмін / jsonConfig.json",
+        "zh-cn": "从 GitHub 副驾驶到光标规则\n更新 @alcalzone/ release-script 到 5.2.1 以固定仓库检查器错误 E0036\n更新为 @tsconfig/node22 到 22.0\n固定混合缩进"
+      },
       "0.2.1": {
         "en": "Added link to CHANGELOG_OLD.md at readme \nUpdated @alcalzone/release-script and related plugins",
         "de": "Link zu CHANGELOG OLD.md bei readme hinzugefügt\nAktualisierte @alcalzone/Release-script und verwandte Plugins",

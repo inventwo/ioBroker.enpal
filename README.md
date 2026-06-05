@@ -81,7 +81,7 @@ Typical examples (depending on your inverter and Enpal configuration):
 <!--
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.2.2 (2026-06-05)
 - (skvarel) Migrated project rules from GitHub Copilot to Cursor rules
 - (skvarel) Updated @alcalzone/release-script to 5.2.1 to fix repository checker error E0036
 - (skvarel) Updated @tsconfig/node22 to 22.0.5
@@ -100,9 +100,6 @@ Typical examples (depending on your inverter and Enpal configuration):
 
 ### 0.1.9 (2026-04-04)
 - (skvarel) Update node version to 24.x for check-and-lint workflow
-
-### 0.1.8 (2026-04-04)
-- (skvarel) Fixed display of unit "None" in data points - now hidden for cleaner UI
 
 ## Older changes
 - [CHANGELOG_OLD.md](CHANGELOG_OLD.md)
