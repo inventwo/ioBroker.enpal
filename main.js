@@ -127,7 +127,7 @@ class Enpal extends utils.Adapter {
 			{
 				id: 'connectorStatus',
 				common: {
-					name: 'Connector status',
+					name: 'Connector status (set by ioBroker or external source)',
 					type: 'string',
 					role: 'text',
 					read: true,
@@ -151,25 +151,17 @@ class Enpal extends utils.Adapter {
 			return;
 		}
 		const sanitize = s => s.replace(/[^a-zA-Z0-9_-]/g, '_');
-		const MODE_NORMALIZE = { fast: 'Full' };
 
 		// Read current charge mode from InfluxDB rows (field: Mode.Charge.Connector.*)
+		// Note: mode is not always stored in InfluxDB — may remain empty if not available
 		const modeRow = rows.find(r => sanitize(r.field).match(/^Mode_Charge_Connector/i));
 		if (modeRow) {
 			const raw = String(modeRow.value);
+			const MODE_NORMALIZE = { fast: 'Full' };
 			const normalized =
 				MODE_NORMALIZE[raw.toLowerCase()] || raw.charAt(0).toUpperCase() + raw.slice(1).toLowerCase();
 			await this.setStateAsync(`${WALLBOX_CHANNEL}.currentMode`, { val: normalized, ack: true });
-			this.log.debug(`Wallbox currentMode: ${normalized} (raw: ${raw})`);
-		}
-
-		// Derive connector status from actual charging power
-		const powerRow = rows.find(r => sanitize(r.field).match(/^Power_Wallbox_Connector.*_Charging$/i));
-		if (powerRow) {
-			const power = Number(powerRow.value);
-			const status = power > 10 ? 'Charging' : 'Available';
-			await this.setStateAsync(`${WALLBOX_CHANNEL}.connectorStatus`, { val: status, ack: true });
-			this.log.debug(`Wallbox connectorStatus: ${status} (power: ${power}W)`);
+			this.log.debug(`Wallbox currentMode from InfluxDB: ${normalized}`);
 		}
 	}
 
@@ -206,6 +198,10 @@ class Enpal extends utils.Adapter {
 				this.log.info(`Wallbox: setting mode to ${mode}`);
 				await this.wallboxClient.setMode(mode);
 				await this.setState(`${WALLBOX_CHANNEL}.mode`, { val: mode, ack: true });
+				await this.setState(`${WALLBOX_CHANNEL}.currentMode`, {
+					val: mode.charAt(0).toUpperCase() + mode.slice(1),
+					ack: true,
+				});
 			}
 		} catch (err) {
 			this.log.error(`Wallbox control failed: ${err.message}`);
