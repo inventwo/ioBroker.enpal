@@ -44,8 +44,11 @@ class Enpal extends utils.Adapter {
 
 		const sync = async () => {
 			const rows = await this.syncInfluxToIoBroker(influxUrl, influxToken, influxOrg, fluxQuery);
-			if (this.wallboxClient && rows) {
-				await this._syncWallboxStatus(rows);
+			if (this.wallboxClient) {
+				if (rows) {
+					await this._syncWallboxStatus(rows);
+				}
+				await this._pollWallboxStatus();
 			}
 		};
 
@@ -127,7 +130,7 @@ class Enpal extends utils.Adapter {
 			{
 				id: 'connectorStatus',
 				common: {
-					name: 'Connector status (set by ioBroker or external source)',
+					name: 'Connector status',
 					type: 'string',
 					role: 'text',
 					read: true,
@@ -163,6 +166,40 @@ class Enpal extends utils.Adapter {
 			await this.setStateAsync(`${WALLBOX_CHANNEL}.currentMode`, { val: normalized, ack: true });
 			this.log.debug(`Wallbox currentMode from InfluxDB: ${normalized}`);
 		}
+
+		// Connector status from InfluxDB (field: Status.Charge.Connector.*) as fallback
+		const statusRow = rows.find(r => sanitize(r.field).match(/^Status_Charge_Connector/i));
+		if (statusRow) {
+			const raw = String(statusRow.value);
+			const normalized = raw.charAt(0).toUpperCase() + raw.slice(1).toLowerCase();
+			await this.setStateAsync(`${WALLBOX_CHANNEL}.connectorStatus`, { val: normalized, ack: true });
+			this.log.debug(`Wallbox connectorStatus from InfluxDB: ${normalized}`);
+		}
+	}
+
+	async _pollWallboxStatus() {
+		if (!this.wallboxClient) {
+			return;
+		}
+		try {
+			await this.wallboxClient.fetchStatus();
+			await this._applyWallboxReadings({
+				mode: this.wallboxClient.mode,
+				status: this.wallboxClient.status,
+			});
+		} catch (err) {
+			this.log.debug(`Wallbox status poll failed: ${err.message}`);
+		}
+	}
+
+	async _applyWallboxReadings({ mode, status }) {
+		if (mode) {
+			await this.setStateAsync(`${WALLBOX_CHANNEL}.currentMode`, { val: mode, ack: true });
+		}
+		if (status) {
+			await this.setStateAsync(`${WALLBOX_CHANNEL}.connectorStatus`, { val: status, ack: true });
+			this.log.debug(`Wallbox connectorStatus: ${status}`);
+		}
 	}
 
 	async onStateChange(id, state) {
@@ -185,10 +222,14 @@ class Enpal extends utils.Adapter {
 				this.log.info('Wallbox: starting charge');
 				await this.wallboxClient.start();
 				await this.setState(`${WALLBOX_CHANNEL}.start`, { val: false, ack: true });
+				await new Promise(r => setTimeout(r, 1000));
+				await this._pollWallboxStatus();
 			} else if (stateKey === 'stop' && state.val === true) {
 				this.log.info('Wallbox: stopping charge');
 				await this.wallboxClient.stop();
 				await this.setState(`${WALLBOX_CHANNEL}.stop`, { val: false, ack: true });
+				await new Promise(r => setTimeout(r, 1000));
+				await this._pollWallboxStatus();
 			} else if (stateKey === 'mode') {
 				const mode = String(state.val).toLowerCase();
 				if (!VALID_MODES.includes(mode)) {
@@ -197,17 +238,9 @@ class Enpal extends utils.Adapter {
 				}
 				this.log.info(`Wallbox: setting mode to ${mode}`);
 				await this.wallboxClient.setMode(mode);
-				// Wait 1 s then verify the mode actually changed
 				await new Promise(r => setTimeout(r, 1000));
-				const status = await this.wallboxClient.fetchStatus();
-				this.log.info(
-					`Wallbox: post-click status: mode=${status.mode ?? 'null'} status=${status.status ?? 'null'}`,
-				);
+				await this._pollWallboxStatus();
 				await this.setState(`${WALLBOX_CHANNEL}.mode`, { val: mode, ack: true });
-				await this.setState(`${WALLBOX_CHANNEL}.currentMode`, {
-					val: mode.charAt(0).toUpperCase() + mode.slice(1),
-					ack: true,
-				});
 			}
 		} catch (err) {
 			this.log.error(`Wallbox control failed: ${err.message}`);
