@@ -10,13 +10,14 @@ alwaysApply: false
 
 - Prefer simple, robust JavaScript — no build step for runtime code
 - async/await for asynchronous operations
-- Use `this.log.*` / adapter logging — never `console.log` in production code
+- JSDoc on public methods where helpful
+- Use `this.log.*` — never `console.log` in production code
 - Tabs, double quotes (see `prettier.config.mjs`)
 - ESLint via `@iobroker/eslint-config` (`eslint.config.mjs`) — run `npm run lint` after every change
 
 ## Resource cleanup
 
-Stop polling in `onUnload()`; always call `callback()`:
+Use adapter-core interval helpers; clear in `onUnload()` and always call `callback()`:
 
 ```javascript
 onUnload(callback) {
@@ -24,6 +25,10 @@ onUnload(callback) {
 		if (this.syncInterval) {
 			this.clearInterval(this.syncInterval);
 			this.syncInterval = null;
+		}
+		if (this.wallboxClient) {
+			this.wallboxClient.close();
+			this.wallboxClient = null;
 		}
 		callback();
 	} catch (error) {
@@ -49,8 +54,8 @@ onUnload(callback) {
 
 - Node.js >= 22
 - Use `@iobroker/adapter-core`; avoid unnecessary new dependencies
+- Prefer built-in Node.js modules where possible (e.g. `WebSocket` in Node 22)
 - Small, focused changes over large refactorings without need
-- Comment public or complex logic briefly — no redundant comments
 
 ## Linting
 

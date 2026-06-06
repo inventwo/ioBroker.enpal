@@ -1,5 +1,5 @@
 ---
-description: Testing with @iobroker/testing and Mocha
+description: Testing with @iobroker/testing
 globs: test/**,*.test.js
 alwaysApply: false
 ---
@@ -21,16 +21,18 @@ Unit tests use **Mocha** (not Jest).
 ## Integration test pattern
 
 ```javascript
-const path = require("node:path");
-const { tests } = require("@iobroker/testing");
+const path = require('node:path');
+const { tests } = require('@iobroker/testing');
 
-tests.integration(path.join(__dirname, ".."), {
+tests.integration(path.join(__dirname, '..'), {
 	defineAdditionalTests({ suite }) {
-		suite("Test adapter with specific configuration", (getHarness) => {
+		suite('Test adapter with specific configuration', (getHarness) => {
 			let harness;
-			before(() => { harness = getHarness(); });
+			before(() => {
+				harness = getHarness();
+			});
 
-			it("should configure and start adapter", function () {
+			it('should configure and start adapter', function () {
 				return new Promise(async (resolve, reject) => {
 					// configure via harness.objects.setObject()
 					// start via harness.startAdapterAndWait()
@@ -38,7 +40,7 @@ tests.integration(path.join(__dirname, ".."), {
 				});
 			}).timeout(40000);
 		});
-	}
+	},
 });
 ```
 
@@ -49,7 +51,7 @@ tests.integration(path.join(__dirname, ".."), {
 - Verify via `harness.states.getState()` / `getStateIDs()`
 - Plan sufficient timeouts for async operations
 - Mock external APIs in unit tests; never bypass the harness
-- **Never** call a real InfluxDB instance in integration tests
+- **Never** call a real InfluxDB instance or Enpal Box in integration tests
 - `main.test.js` is currently a placeholder — replace with real tests when adding features
 - New functionality should have at least one meaningful test where practical
 

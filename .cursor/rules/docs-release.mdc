@@ -1,6 +1,6 @@
 ---
-description: README, changelog, docs, and release workflow
-globs: README.md,io-package.json,CHANGELOG_OLD.md,docs/**
+description: README, changelog, and release workflow
+globs: README.md,io-package.json,CHANGELOG_OLD.md
 alwaysApply: false
 ---
 
@@ -8,9 +8,11 @@ alwaysApply: false
 
 ## README (English only — ioBroker requirement)
 
+Required sections: Installation, Configuration, Usage, Data Points, Changelog, License.
+
 - **All content in English** — no German or other languages in `README.md`
+- User-facing language; reference issues as `fixes #XX`
 - Update Configuration, Usage, and Data Points when admin options or behavior change
-- Reference issues as `fixes #XX` where applicable
 
 ## Changelog format
 
@@ -21,10 +23,10 @@ alwaysApply: false
 
 ### **WORK IN PROGRESS**
 
-- (skvarel) Plain user-facing description in English
+- (author) Plain user-facing description in English
 
-### 0.2.1 (2026-01-15)
-- (skvarel) Released change
+### 0.2.2 (2026-06-05)
+- (author) Released change
 ```
 
 ## Workflow
@@ -33,7 +35,7 @@ alwaysApply: false
 - **Every fix or feature:** add a changelog entry — no exceptions
 - **Release:** `npm run release-patch|minor|major` — script sets version, moves WIP to version block
 - **Never** edit `CHANGELOG_OLD.md` manually
-- **Never** use bold type tags in changelog lines (e.g. `**FIXED**`, `**NEW**` — breaks io-package news translation)
+- **Never** use bold type tags in changelog lines (breaks io-package news translation)
 
 ## io-package.json
 
@@ -49,8 +51,3 @@ Official ioBroker test actions (see `.github/workflows/test-and-release.yml`):
 - `ioBroker/testing-action-deploy@v1` — npm deploy on version tags
 
 Job order: `check-and-lint` (no deps) → `adapter-tests` → deploy only on version tag.
-
-## Agent boundaries
-
-- **Allowed:** edit files, run lint/check/tests locally, fix errors, update documentation
-- **Not allowed without explicit request:** `git commit`, `git push`, release tagging, release automation

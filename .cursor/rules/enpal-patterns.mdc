@@ -8,9 +8,11 @@ alwaysApply: false
 
 ## Architecture
 
-- `main.js` — complete adapter (`Enpal extends utils.Adapter`): polling, Influx query, CSV parsing, state creation
-- No separate `lib/` modules — keep logic in `main.js` unless complexity clearly warrants extraction
-- Data source: local InfluxDB 2.x (Enpal system), polled via HTTP/HTTPS
+- `main.js` — adapter class (`Enpal extends utils.Adapter`): Influx polling, CSV parsing, state creation, optional wallbox control
+- `lib/wallbox.js` — Blazor SignalR client for Enpal Box `/wallbox` page (wallbox control only)
+- Data sources:
+  - **Read:** local InfluxDB 2.x (Enpal system), polled via HTTP/HTTPS
+  - **Control (optional):** Enpal Box web interface via Blazor WebSocket
 
 ## InfluxDB connection
 
@@ -30,7 +32,7 @@ alwaysApply: false
 - In `onReady()`: set `info.connection` to `false` first; switch to `true` only after a successful query
 - Always call `callback()` in `onUnload()`, even on error
 
-## State model
+## State model (InfluxDB)
 
 - States are created dynamically from Influx CSV rows
 - Full ID schema: `enpal.<instance>.<measurement>.<device>.<field>`
@@ -38,16 +40,44 @@ alwaysApply: false
 - Sanitize: characters outside `[a-zA-Z0-9_-]` → `_`
 - Units: `Percent` → `%`; `None` → empty unit (not displayed)
 
-## Key functions in main.js
+## State model (Wallbox control)
+
+- Fixed channel `wallbox_control` — created only when `wallbox_enabled` is true
+- States:
+  - `wallbox_control.start` — boolean button (write `true` to start charging)
+  - `wallbox_control.stop` — boolean button (write `true` to stop charging)
+  - `wallbox_control.mode` — string enum: `eco`, `solar`, `full`, `smart`
+  - `wallbox_control.currentMode` — read-only, synced from Enpal Box HTML
+  - `wallbox_control.connectorStatus` — read-only, synced from Enpal Box HTML
+- Wallbox status is refreshed on each Influx poll cycle via HTTP GET `/wallbox`
+- WebSocket connection is opened on demand for control commands (not kept permanently)
+
+## Wallbox control (lib/wallbox.js)
+
+- Requires Enpal firmware 8.50+ with `/wallbox` Blazor page
+- Flow: GET `/wallbox` → negotiate `/_blazor` → WebSocket → StartCircuit → parse RenderBatch for button handler IDs → click via `BeginInvokeDotNetFromJS`
+- Reference implementation: [derolli1976/enpal](https://github.com/derolli1976/enpal) (`api/wallbox_client.py`)
+- No external npm dependencies — MessagePack encoder/decoder is inline
+
+## Key functions
+
+### main.js
 
 - `queryInflux()` — protocol-aware HTTP request to InfluxDB
 - `parseCsv()` — must stay robust against incomplete/commented CSV lines
 - `ensureParentChannels()` — creates missing channel hierarchy before state creation
 - `syncInfluxToIoBroker()` — central sync path; must not crash on errors
-- `show_sync_info` — controls whether successful syncs are logged as `info`
+- `_initWallbox()` / `_createWallboxStates()` / `_syncWallboxStatus()` / `onStateChange()` — wallbox control
+
+### lib/wallbox.js
+
+- `WallboxBlazorClient` — connect, clickButton, start/stop/setMode, fetchStatus
+- `extractStatusFromHtml()` — parse mode/status from pre-rendered `/wallbox` HTML
 
 ## Pitfalls
 
-- Do not change datapoint naming or parsing without considering backward compatibility (visualizations, automations)
+- Do not change Influx datapoint naming or parsing without considering backward compatibility
 - Do not retry failed Influx queries in a tight loop — wait for the next poll cycle
 - `syncInfluxToIoBroker()` returns early on query failure or empty results (connection stays `false`)
+- Wallbox control is reverse-engineered — Enpal firmware updates may break the Blazor protocol
+- Avoid parallel wallbox control from multiple clients (GUI, HA, ioBroker) at the same time

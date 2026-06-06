@@ -1,0 +1,54 @@
+---
+description: ioBroker.enpal — project context, git, changelog (always apply)
+alwaysApply: true
+---
+
+# ioBroker.enpal
+
+Reads energy data from a local InfluxDB 2.x instance (Enpal solar system) and exposes ioBroker states. Optional wallbox control via the Enpal Box web interface (Blazor SignalR).
+
+## Stack
+
+- Plain **JavaScript** in `main.js` — no TypeScript build step; type hints via JSDoc + `admin/adapter-config.d.ts`
+- Admin UI via **jsonConfig** (`admin/jsonConfig.json`), not a compiled React frontend
+- HTTP: native `node:http` / `node:https` (no axios/request)
+- Data source: local InfluxDB 2.x, polled via Flux query API
+- Wallbox control: `lib/wallbox.js` (Blazor SignalR WebSocket to Enpal Box `/wallbox`)
+
+## Key files
+
+- `main.js` — adapter logic (Influx polling, CSV parsing, states, optional wallbox control)
+- `lib/wallbox.js` — Blazor SignalR client for Enpal Box wallbox control
+- `io-package.json` — metadata, native config, `info.connection`
+- `admin/jsonConfig.json` — configuration UI
+- `admin/i18n/*.json` — admin translations
+- `.github/workflows/test-and-release.yml` — CI and release
+
+## Git (mandatory)
+
+- **Never** run `git commit`, `git push`, or releases unless the user explicitly asks
+- User commits and pushes; releases via `npm run release-*` (AlCalzone release-script)
+- **Never** run `npm run translate` — owner runs it manually before release
+
+## Changelog & README (mandatory for every change)
+
+For **every code or config change**, update `README.md` before finishing:
+
+1. Add a user-facing entry under `### **WORK IN PROGRESS**` (English)
+2. Format: `- (author) Plain description` — no bold prefixes (`**FIXED**`, `**NEW**`, etc.; breaks news translation)
+3. Update README sections (Installation, Configuration, Usage, Data Points) when behavior or options change
+4. Do **not** edit `CHANGELOG_OLD.md` manually — release-script moves older entries there
+
+## Scope
+
+- Minimal, focused diffs; match patterns in `main.js`, `lib/`, and `admin/`
+- After every code change: run `npm run lint` and fix all warnings (CI uses `--max-warnings 0`)
+
+## Local checks (optional, matches CI)
+
+- `npm run lint`
+- `npm run test`
+
+## Further rules
+
+Detailed conventions live in `.cursor/rules/` (code, admin UI, testing, docs/CI, Enpal patterns).
