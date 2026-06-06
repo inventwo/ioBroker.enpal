@@ -24,6 +24,7 @@ Reads energy data from the local InfluxDB 2.x instance provided by Enpal solar s
 - Analyze grid consumption and feed-in power
 - Automate based on power generation
 - Visualize energy flows in ioBroker dashboard
+- Optionally control the Enpal wallbox (charge mode, start/stop) via the local Enpal Box web interface
 
 ## Features
 
@@ -33,6 +34,7 @@ The adapter connects directly to the **local InfluxDB** that the Enpal box write
 - Dynamic state creation under `enpal.0.<measurement>.<device>.<field>`
 - Configurable polling interval (default: 60 seconds)
 - Connection status via `info.connection` — the adapter instance turns red when the database is unreachable
+- Optional **wallbox control** (charge mode, start/stop) via the Enpal Box Blazor web interface — uses the same host as the InfluxDB URL (port 80)
 
 ## Data Points
 
@@ -52,6 +54,37 @@ Typical examples (depending on your inverter and Enpal configuration):
 
 > The actual field names depend on your Enpal system version and hardware configuration.
 
+### Wallbox control (`wallbox_control`)
+
+When **Wallbox control** is enabled in the adapter configuration, a fixed channel is created (independent of InfluxDB auto-discovery):
+
+```
+enpal.0.wallbox_control.<state>
+```
+
+| State | Type | Read | Write | Description |
+|-------|------|------|-------|-------------|
+| `start` | button | no | yes | Start charging (set to `true` to trigger) |
+| `stop` | button | no | yes | Stop charging (set to `true` to trigger) |
+| `mode` | value | yes | yes | Set charge mode: `eco`, `solar`, `full`, or `smart` |
+| `currentMode` | text | yes | no | Current charge mode reported by the wallbox (e.g. `Eco`, `Solar`, `Full`) |
+| `connectorStatus` | text | yes | no | Connector status (e.g. `Available`, `Charging`, `Connected`) |
+
+**How it works**
+
+- **Control** (mode, start, stop): The adapter connects to `http://<enpal-box>/wallbox` via Blazor SignalR (same approach as the [Home Assistant Enpal integration](https://github.com/derolli1976/enpal)) and simulates button clicks.
+- **Status** (`currentMode`, `connectorStatus`): Read from the Enpal Box page `http://<enpal-box>/deviceMessages` (`Mode.Charge.Connector.1`, `Status.Wallbox.Connector.1`). Updated on each sync interval and after control actions.
+
+**Requirements**
+
+- Enpal Box firmware **8.50+** (Blazor wallbox page)
+- Wallbox control checkbox enabled in adapter config
+- ioBroker host must reach the Enpal Box on the local network (same IP as InfluxDB, HTTP port 80)
+
+**Not supported**
+
+- Wallbox settings only available in the Enpal app (e.g. automatic charge on plug-in) are not exposed as ioBroker states.
+
 ## Installation
 
 1. Install the adapter from the ioBroker admin interface
@@ -62,6 +95,7 @@ Typical examples (depending on your inverter and Enpal configuration):
    - **Organisation ID**: Your InfluxDB organisation
    - **Bucket**: The bucket Enpal writes to (typically `enpal` or similar)
    - **Update Interval**: Data refresh interval in seconds (default: `60`)
+   - **Wallbox control** (optional): Enable to create `wallbox_control` states and allow charge mode / start / stop via the Enpal Box web UI (no extra URL — host is taken from the InfluxDB URL)
 4. Save and start the instance
 
 ### How to find your InfluxDB credentials
@@ -74,6 +108,7 @@ Typical examples (depending on your inverter and Enpal configuration):
 ## Privacy & Data Handling
 
 - This adapter only connects to your **local InfluxDB** — no data is sent to any cloud service
+- With wallbox control enabled, the adapter also connects to your **local Enpal Box** (HTTP and WebSocket on the same host as InfluxDB) — still no cloud access
 - Your API token is stored encrypted in the ioBroker database
 - No external servers are contacted
 
