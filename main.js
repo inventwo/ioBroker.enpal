@@ -43,9 +43,9 @@ class Enpal extends utils.Adapter {
 		const fluxQuery = `from(bucket: "${influxBucket}")\n  |> range(start: -24h)\n  |> last()`;
 
 		const sync = async () => {
-			await this.syncInfluxToIoBroker(influxUrl, influxToken, influxOrg, fluxQuery);
-			if (this.wallboxClient) {
-				await this._syncWallboxStatus();
+			const rows = await this.syncInfluxToIoBroker(influxUrl, influxToken, influxOrg, fluxQuery);
+			if (this.wallboxClient && rows) {
+				await this._syncWallboxStatus(rows);
 			}
 		};
 
@@ -146,17 +146,30 @@ class Enpal extends utils.Adapter {
 		}
 	}
 
-	async _syncWallboxStatus() {
-		try {
-			const { mode, status } = await this.wallboxClient.fetchStatus();
-			if (mode) {
-				await this.setStateAsync(`${WALLBOX_CHANNEL}.currentMode`, { val: mode, ack: true });
-			}
-			if (status) {
-				await this.setStateAsync(`${WALLBOX_CHANNEL}.connectorStatus`, { val: status, ack: true });
-			}
-		} catch (err) {
-			this.log.debug(`Wallbox status sync failed: ${err.message}`);
+	async _syncWallboxStatus(rows) {
+		if (!rows || !rows.length) {
+			return;
+		}
+		const sanitize = s => s.replace(/[^a-zA-Z0-9_-]/g, '_');
+		const MODE_NORMALIZE = { fast: 'Full' };
+
+		// Read current charge mode from InfluxDB rows (field: Mode.Charge.Connector.*)
+		const modeRow = rows.find(r => sanitize(r.field).match(/^Mode_Charge_Connector/i));
+		if (modeRow) {
+			const raw = String(modeRow.value);
+			const normalized =
+				MODE_NORMALIZE[raw.toLowerCase()] || raw.charAt(0).toUpperCase() + raw.slice(1).toLowerCase();
+			await this.setStateAsync(`${WALLBOX_CHANNEL}.currentMode`, { val: normalized, ack: true });
+			this.log.debug(`Wallbox currentMode: ${normalized} (raw: ${raw})`);
+		}
+
+		// Derive connector status from actual charging power
+		const powerRow = rows.find(r => sanitize(r.field).match(/^Power_Wallbox_Connector.*_Charging$/i));
+		if (powerRow) {
+			const power = Number(powerRow.value);
+			const status = power > 10 ? 'Charging' : 'Available';
+			await this.setStateAsync(`${WALLBOX_CHANNEL}.connectorStatus`, { val: status, ack: true });
+			this.log.debug(`Wallbox connectorStatus: ${status} (power: ${power}W)`);
 		}
 	}
 
@@ -180,12 +193,10 @@ class Enpal extends utils.Adapter {
 				this.log.info('Wallbox: starting charge');
 				await this.wallboxClient.start();
 				await this.setState(`${WALLBOX_CHANNEL}.start`, { val: false, ack: true });
-				await this._syncWallboxStatus();
 			} else if (stateKey === 'stop' && state.val === true) {
 				this.log.info('Wallbox: stopping charge');
 				await this.wallboxClient.stop();
 				await this.setState(`${WALLBOX_CHANNEL}.stop`, { val: false, ack: true });
-				await this._syncWallboxStatus();
 			} else if (stateKey === 'mode') {
 				const mode = String(state.val).toLowerCase();
 				if (!VALID_MODES.includes(mode)) {
@@ -195,7 +206,6 @@ class Enpal extends utils.Adapter {
 				this.log.info(`Wallbox: setting mode to ${mode}`);
 				await this.wallboxClient.setMode(mode);
 				await this.setState(`${WALLBOX_CHANNEL}.mode`, { val: mode, ack: true });
-				await this._syncWallboxStatus();
 			}
 		} catch (err) {
 			this.log.error(`Wallbox control failed: ${err.message}`);
@@ -372,6 +382,7 @@ class Enpal extends utils.Adapter {
 		if (this.config.show_sync_info) {
 			this.log.info(`InfluxDB sync completed. ${rows.length} data points updated.`);
 		}
+		return rows;
 	}
 }
 

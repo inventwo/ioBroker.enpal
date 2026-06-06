@@ -85,7 +85,6 @@ Typical examples (depending on your inverter and Enpal configuration):
 - (skvarel) Added optional wallbox control via Enpal Box web interface (Blazor SignalR)
 - (skvarel) New config option: wallbox_enabled (checkbox); Enpal Box URL is derived automatically from InfluxDB URL
 - (skvarel) New states under wallbox_control: start, stop, mode, currentMode, connectorStatus
-- (skvarel) Restructured Cursor rules: main page `.cursor/iobroker-adapter.mdc` plus detail rules in `.cursor/rules/`
 
 ### 0.2.2 (2026-06-05)
 - (skvarel) Migrated project rules from GitHub Copilot to Cursor rules
