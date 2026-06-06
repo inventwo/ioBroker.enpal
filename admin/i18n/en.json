@@ -7,7 +7,5 @@
 	"interval_s": "Query interval (s)",
 	"show_sync_info": "Show info messages for each synchronization",
 	"wallbox_section_header": "Wallbox Control",
-	"wallbox_enabled": "Enable wallbox control",
-	"enpal_url": "Enpal Box URL",
-	"enpal_url_placeholder": "http://192.168.x.x"
+	"wallbox_enabled": "Enable wallbox control (uses same IP as InfluxDB)"
 }

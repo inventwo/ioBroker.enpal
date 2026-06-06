@@ -54,9 +54,13 @@ class Enpal extends utils.Adapter {
 	}
 
 	async _initWallbox() {
-		const enpalUrl = (this.config.enpal_url || '').trim();
-		if (!enpalUrl) {
-			this.log.warn('Wallbox control enabled but no Enpal Box URL configured. Skipping.');
+		// Derive Enpal Box URL from the InfluxDB URL (same host, default port 80)
+		let enpalUrl;
+		try {
+			const influxParsed = new URL(this.config.influx_url || 'http://localhost:8086');
+			enpalUrl = `${influxParsed.protocol}//${influxParsed.hostname}`;
+		} catch {
+			this.log.warn('Wallbox control: could not derive Enpal Box URL from InfluxDB URL. Skipping.');
 			return;
 		}
 

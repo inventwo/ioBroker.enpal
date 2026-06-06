@@ -166,8 +166,7 @@
     "influx_bucket": "",
     "interval_s": 60,
     "show_sync_info": false,
-    "wallbox_enabled": false,
-    "enpal_url": ""
+    "wallbox_enabled": false
   },
   "protectedNative": [
     "influx_token"
