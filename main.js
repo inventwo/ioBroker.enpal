@@ -8,6 +8,7 @@ const { WallboxBlazorClient } = require('./lib/wallbox');
 
 const WALLBOX_CHANNEL = 'wallbox_control';
 const VALID_MODES = ['eco', 'solar', 'full', 'smart'];
+const MODE_LABELS = { eco: 'Eco', solar: 'Solar', full: 'Full', smart: 'Smart' };
 
 class Enpal extends utils.Adapter {
 	constructor(options) {
@@ -167,8 +168,8 @@ class Enpal extends utils.Adapter {
 			this.log.debug(`Wallbox currentMode from InfluxDB: ${normalized}`);
 		}
 
-		// Connector status from InfluxDB (field: Status.Charge.Connector.*) as fallback
-		const statusRow = rows.find(r => sanitize(r.field).match(/^Status_Charge_Connector/i));
+		// Connector status from InfluxDB (Status.Wallbox.Connector.* or Status.Charge.Connector.*)
+		const statusRow = rows.find(r => sanitize(r.field).match(/^Status_(Wallbox_|Charge_)?Connector/i));
 		if (statusRow) {
 			const raw = String(statusRow.value);
 			const normalized = raw.charAt(0).toUpperCase() + raw.slice(1).toLowerCase();
@@ -182,7 +183,11 @@ class Enpal extends utils.Adapter {
 			return;
 		}
 		try {
-			await this.wallboxClient.fetchStatus();
+			// Authoritative on Enpal boxes: /deviceMessages (Mode.Charge.Connector.1)
+			await this.wallboxClient.fetchDeviceMessagesStatus();
+			if (!this.wallboxClient.mode) {
+				await this.wallboxClient.fetchStatus();
+			}
 			await this._applyWallboxReadings({
 				mode: this.wallboxClient.mode,
 				status: this.wallboxClient.status,
@@ -238,8 +243,12 @@ class Enpal extends utils.Adapter {
 				}
 				this.log.info(`Wallbox: setting mode to ${mode}`);
 				await this.wallboxClient.setMode(mode);
-				await new Promise(r => setTimeout(r, 1000));
-				await this._pollWallboxStatus();
+				await new Promise(r => setTimeout(r, 1500));
+				await this.wallboxClient.fetchDeviceMessagesStatus();
+				await this._applyWallboxReadings({
+					mode: this.wallboxClient.mode || MODE_LABELS[mode],
+					status: this.wallboxClient.status,
+				});
 				await this.setState(`${WALLBOX_CHANNEL}.mode`, { val: mode, ack: true });
 			}
 		} catch (err) {
