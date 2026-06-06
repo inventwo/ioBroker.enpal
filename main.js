@@ -197,6 +197,12 @@ class Enpal extends utils.Adapter {
 				}
 				this.log.info(`Wallbox: setting mode to ${mode}`);
 				await this.wallboxClient.setMode(mode);
+				// Wait 1 s then verify the mode actually changed
+				await new Promise(r => setTimeout(r, 1000));
+				const status = await this.wallboxClient.fetchStatus();
+				this.log.info(
+					`Wallbox: post-click status: mode=${status.mode ?? 'null'} status=${status.status ?? 'null'}`,
+				);
 				await this.setState(`${WALLBOX_CHANNEL}.mode`, { val: mode, ack: true });
 				await this.setState(`${WALLBOX_CHANNEL}.currentMode`, {
 					val: mode.charAt(0).toUpperCase() + mode.slice(1),
