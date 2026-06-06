@@ -4,7 +4,7 @@ const utils = require('@iobroker/adapter-core');
 const http = require('node:http');
 const https = require('node:https');
 const { URL } = require('node:url');
-const { WallboxBrowserClient } = require('./lib/wallbox');
+const { WallboxBlazorClient } = require('./lib/wallbox');
 
 const WALLBOX_CHANNEL = 'wallbox_control';
 const VALID_MODES = ['eco', 'solar', 'full', 'smart'];
@@ -65,7 +65,7 @@ class Enpal extends utils.Adapter {
 		}
 
 		this.log.info(`Wallbox control enabled. Enpal Box URL: ${enpalUrl}`);
-		this.wallboxClient = new WallboxBrowserClient(enpalUrl, this.log);
+		this.wallboxClient = new WallboxBlazorClient(enpalUrl, this.log);
 
 		await this._createWallboxStates();
 		this.subscribeStates(`${WALLBOX_CHANNEL}.*`);
