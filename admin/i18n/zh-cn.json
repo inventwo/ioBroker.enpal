@@ -1,9 +1,13 @@
 {
 	"enpal adapter settings": "enpal 适配器设置",
+	"enpal_url": "恩帕尔邮箱网址",
+	"enpal_url_placeholder": "http://192.168.x.x",
 	"influx_bucket": "Bucket",
 	"influx_org": "组织 ID",
 	"influx_token": "API 令牌",
 	"influx_url": "InfluxDB URL",
 	"interval_s": "查询间隔（秒）",
-	"show_sync_info": "显示每次同步的信息消息"
+	"show_sync_info": "显示每次同步的信息消息",
+	"wallbox_enabled": "启用墙盒控制",
+	"wallbox_section_header": "壁箱控制"
 }

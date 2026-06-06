@@ -1,0 +1,53 @@
+---
+description: InfluxDB integration and adapter-specific patterns for ioBroker.enpal
+globs: main.js,lib/**,docs/**
+alwaysApply: false
+---
+
+# Enpal Patterns
+
+## Architecture
+
+- `main.js` — complete adapter (`Enpal extends utils.Adapter`): polling, Influx query, CSV parsing, state creation
+- No separate `lib/` modules — keep logic in `main.js` unless complexity clearly warrants extraction
+- Data source: local InfluxDB 2.x (Enpal system), polled via HTTP/HTTPS
+
+## InfluxDB connection
+
+- Query API: `POST /api/v2/query?org=<org>`
+- Headers:
+  - `Authorization: Token <token>`
+  - `Content-Type: application/vnd.flux`
+  - `Accept: application/csv`
+- Protocol: use `node:http` or `node:https` based on configured URL (`queryInflux()`)
+- On HTTP errors: set `info.connection` to `false` and log clearly
+- **Avoid:** axios, request, or other HTTP libraries
+
+## Polling and lifecycle
+
+- Interval: `native.interval_s` (seconds, default 60)
+- Start polling with `this.setInterval` in `onReady()`; stop with `this.clearInterval` in `onUnload()`
+- In `onReady()`: set `info.connection` to `false` first; switch to `true` only after a successful query
+- Always call `callback()` in `onUnload()`, even on error
+
+## State model
+
+- States are created dynamically from Influx CSV rows
+- Full ID schema: `enpal.<instance>.<measurement>.<device>.<field>`
+- Without device tag: `enpal.<instance>.<measurement>.<field>`
+- Sanitize: characters outside `[a-zA-Z0-9_-]` → `_`
+- Units: `Percent` → `%`; `None` → empty unit (not displayed)
+
+## Key functions in main.js
+
+- `queryInflux()` — protocol-aware HTTP request to InfluxDB
+- `parseCsv()` — must stay robust against incomplete/commented CSV lines
+- `ensureParentChannels()` — creates missing channel hierarchy before state creation
+- `syncInfluxToIoBroker()` — central sync path; must not crash on errors
+- `show_sync_info` — controls whether successful syncs are logged as `info`
+
+## Pitfalls
+
+- Do not change datapoint naming or parsing without considering backward compatibility (visualizations, automations)
+- Do not retry failed Influx queries in a tight loop — wait for the next poll cycle
+- `syncInfluxToIoBroker()` returns early on query failure or empty results (connection stays `false`)

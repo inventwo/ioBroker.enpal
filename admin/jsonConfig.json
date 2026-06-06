@@ -70,6 +70,36 @@
 			"md": 6,
 			"lg": 6,
 			"xl": 6
+		},
+		"_wallbox_header": {
+			"type": "header",
+			"text": "wallbox_section_header",
+			"size": 4,
+			"newLine": true
+		},
+		"wallbox_enabled": {
+			"type": "checkbox",
+			"label": "wallbox_enabled",
+			"newLine": true,
+			"default": false,
+			"xs": 12,
+			"sm": 6,
+			"md": 6,
+			"lg": 6,
+			"xl": 6
+		},
+		"enpal_url": {
+			"type": "text",
+			"label": "enpal_url",
+			"newLine": true,
+			"default": "",
+			"placeholder": "enpal_url_placeholder",
+			"hidden": "!data.wallbox_enabled",
+			"xs": 12,
+			"sm": 6,
+			"md": 6,
+			"lg": 6,
+			"xl": 6
 		}
 	}
 }

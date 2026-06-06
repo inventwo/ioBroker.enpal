@@ -1,0 +1,60 @@
+---
+description: ioBroker adapter code quality and JavaScript conventions
+globs: main.js,lib/**,eslint.config.mjs,prettier.config.mjs
+alwaysApply: false
+---
+
+# Code Quality
+
+## Style
+
+- Prefer simple, robust JavaScript — no build step for runtime code
+- async/await for asynchronous operations
+- Use `this.log.*` / adapter logging — never `console.log` in production code
+- Tabs, double quotes (see `prettier.config.mjs`)
+- ESLint via `@iobroker/eslint-config` (`eslint.config.mjs`) — run `npm run lint` after every change
+
+## Resource cleanup
+
+Stop polling in `onUnload()`; always call `callback()`:
+
+```javascript
+onUnload(callback) {
+	try {
+		if (this.syncInterval) {
+			this.clearInterval(this.syncInterval);
+			this.syncInterval = null;
+		}
+		callback();
+	} catch (error) {
+		this.log.error(`Error during unload: ${error.message}`);
+		callback();
+	}
+}
+```
+
+## Error handling
+
+- Wrap async/API work in try/catch; log errors, do not crash the adapter
+- Use adapter log levels: error, warn, info, debug
+- Handle network failures gracefully; set `info.connection` accordingly
+- Do not retry failed Influx queries in a tight loop — wait for the next poll cycle
+
+## HTTP
+
+- **Preferred:** native `node:http` / `node:https` (used in `queryInflux()`)
+- **Avoid:** axios, request, or other HTTP libraries
+
+## Dependencies
+
+- Node.js >= 22
+- Use `@iobroker/adapter-core`; avoid unnecessary new dependencies
+- Small, focused changes over large refactorings without need
+- Comment public or complex logic briefly — no redundant comments
+
+## Linting
+
+After every relevant code change:
+
+1. `npm run lint` (or `npm run lint-fix` first, then fix remaining issues manually)
+2. `npm run check` when types or `tsconfig.check.json` are affected

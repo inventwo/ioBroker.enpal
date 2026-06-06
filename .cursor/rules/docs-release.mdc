@@ -1,0 +1,56 @@
+---
+description: README, changelog, docs, and release workflow
+globs: README.md,io-package.json,CHANGELOG_OLD.md,docs/**
+alwaysApply: false
+---
+
+# Documentation & Releases
+
+## README (English only — ioBroker requirement)
+
+- **All content in English** — no German or other languages in `README.md`
+- Update Configuration, Usage, and Data Points when admin options or behavior change
+- Reference issues as `fixes #XX` where applicable
+
+## Changelog format
+
+```markdown
+<!--
+  ### **WORK IN PROGRESS**
+-->
+
+### **WORK IN PROGRESS**
+
+- (skvarel) Plain user-facing description in English
+
+### 0.2.1 (2026-01-15)
+- (skvarel) Released change
+```
+
+## Workflow
+
+- **During development:** all entries under `### **WORK IN PROGRESS**`
+- **Every fix or feature:** add a changelog entry — no exceptions
+- **Release:** `npm run release-patch|minor|major` — script sets version, moves WIP to version block
+- **Never** edit `CHANGELOG_OLD.md` manually
+- **Never** use bold type tags in changelog lines (e.g. `**FIXED**`, `**NEW**` — breaks io-package news translation)
+
+## io-package.json
+
+- Keep `common.version` in sync with `package.json`
+- New config options: add to `native` with defaults
+
+## CI/CD
+
+Official ioBroker test actions (see `.github/workflows/test-and-release.yml`):
+
+- `ioBroker/testing-action-check@v1` — lint + package check (**lint-first**)
+- `ioBroker/testing-action-adapter@v1` — adapter tests
+- `ioBroker/testing-action-deploy@v1` — npm deploy on version tags
+
+Job order: `check-and-lint` (no deps) → `adapter-tests` → deploy only on version tag.
+
+## Agent boundaries
+
+- **Allowed:** edit files, run lint/check/tests locally, fix errors, update documentation
+- **Not allowed without explicit request:** `git commit`, `git push`, release tagging, release automation

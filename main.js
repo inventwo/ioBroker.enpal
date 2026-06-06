@@ -4,6 +4,10 @@ const utils = require('@iobroker/adapter-core');
 const http = require('node:http');
 const https = require('node:https');
 const { URL } = require('node:url');
+const { WallboxBlazorClient } = require('./lib/wallbox');
+
+const WALLBOX_CHANNEL = 'wallbox_control';
+const VALID_MODES = ['eco', 'solar', 'full', 'smart'];
 
 class Enpal extends utils.Adapter {
 	constructor(options) {
@@ -12,8 +16,10 @@ class Enpal extends utils.Adapter {
 			name: 'enpal',
 		});
 		this.on('ready', this.onReady.bind(this));
+		this.on('stateChange', this.onStateChange.bind(this));
 		this.on('unload', this.onUnload.bind(this));
 		this.syncInterval = null;
+		this.wallboxClient = null;
 	}
 
 	async onReady() {
@@ -30,14 +36,166 @@ class Enpal extends utils.Adapter {
 			return;
 		}
 
+		if (this.config.wallbox_enabled) {
+			await this._initWallbox();
+		}
+
 		const fluxQuery = `from(bucket: "${influxBucket}")\n  |> range(start: -24h)\n  |> last()`;
 
 		const sync = async () => {
 			await this.syncInfluxToIoBroker(influxUrl, influxToken, influxOrg, fluxQuery);
+			if (this.wallboxClient) {
+				await this._syncWallboxStatus();
+			}
 		};
 
 		await sync();
 		this.syncInterval = this.setInterval(sync, intervalS * 1000);
+	}
+
+	async _initWallbox() {
+		const enpalUrl = (this.config.enpal_url || '').trim();
+		if (!enpalUrl) {
+			this.log.warn('Wallbox control enabled but no Enpal Box URL configured. Skipping.');
+			return;
+		}
+
+		this.log.info(`Wallbox control enabled. Enpal Box URL: ${enpalUrl}`);
+		this.wallboxClient = new WallboxBlazorClient(enpalUrl, this.log);
+
+		await this._createWallboxStates();
+		this.subscribeStates(`${WALLBOX_CHANNEL}.*`);
+	}
+
+	async _createWallboxStates() {
+		await this.setObjectNotExistsAsync(WALLBOX_CHANNEL, {
+			type: 'channel',
+			common: { name: 'Wallbox Control' },
+			native: {},
+		});
+
+		const statesDef = [
+			{
+				id: 'start',
+				common: {
+					name: 'Start charging',
+					type: 'boolean',
+					role: 'button',
+					read: false,
+					write: true,
+					def: false,
+				},
+			},
+			{
+				id: 'stop',
+				common: {
+					name: 'Stop charging',
+					type: 'boolean',
+					role: 'button',
+					read: false,
+					write: true,
+					def: false,
+				},
+			},
+			{
+				id: 'mode',
+				common: {
+					name: 'Set charging mode',
+					type: 'string',
+					role: 'value',
+					read: true,
+					write: true,
+					def: '',
+					states: { eco: 'Eco', solar: 'Solar', full: 'Full', smart: 'Smart' },
+				},
+			},
+			{
+				id: 'currentMode',
+				common: {
+					name: 'Current charging mode',
+					type: 'string',
+					role: 'text',
+					read: true,
+					write: false,
+					def: '',
+				},
+			},
+			{
+				id: 'connectorStatus',
+				common: {
+					name: 'Connector status',
+					type: 'string',
+					role: 'text',
+					read: true,
+					write: false,
+					def: '',
+				},
+			},
+		];
+
+		for (const { id, common } of statesDef) {
+			await this.setObjectNotExistsAsync(`${WALLBOX_CHANNEL}.${id}`, {
+				type: 'state',
+				common,
+				native: {},
+			});
+		}
+	}
+
+	async _syncWallboxStatus() {
+		try {
+			const { mode, status } = await this.wallboxClient.fetchStatus();
+			if (mode) {
+				await this.setStateAsync(`${WALLBOX_CHANNEL}.currentMode`, { val: mode, ack: true });
+			}
+			if (status) {
+				await this.setStateAsync(`${WALLBOX_CHANNEL}.connectorStatus`, { val: status, ack: true });
+			}
+		} catch (err) {
+			this.log.debug(`Wallbox status sync failed: ${err.message}`);
+		}
+	}
+
+	async onStateChange(id, state) {
+		if (!state || state.ack) {
+			return;
+		}
+		if (!this.wallboxClient) {
+			return;
+		}
+
+		const localId = id.replace(`${this.namespace}.`, '');
+		if (!localId.startsWith(`${WALLBOX_CHANNEL}.`)) {
+			return;
+		}
+
+		const stateKey = localId.slice(WALLBOX_CHANNEL.length + 1);
+
+		try {
+			if (stateKey === 'start' && state.val === true) {
+				this.log.info('Wallbox: starting charge');
+				await this.wallboxClient.start();
+				await this.setState(`${WALLBOX_CHANNEL}.start`, { val: false, ack: true });
+				await this._syncWallboxStatus();
+			} else if (stateKey === 'stop' && state.val === true) {
+				this.log.info('Wallbox: stopping charge');
+				await this.wallboxClient.stop();
+				await this.setState(`${WALLBOX_CHANNEL}.stop`, { val: false, ack: true });
+				await this._syncWallboxStatus();
+			} else if (stateKey === 'mode') {
+				const mode = String(state.val).toLowerCase();
+				if (!VALID_MODES.includes(mode)) {
+					this.log.warn(`Wallbox: invalid mode "${state.val}". Allowed: ${VALID_MODES.join(', ')}`);
+					return;
+				}
+				this.log.info(`Wallbox: setting mode to ${mode}`);
+				await this.wallboxClient.setMode(mode);
+				await this.setState(`${WALLBOX_CHANNEL}.mode`, { val: mode, ack: true });
+				await this._syncWallboxStatus();
+			}
+		} catch (err) {
+			this.log.error(`Wallbox control failed: ${err.message}`);
+		}
 	}
 
 	onUnload(callback) {
@@ -45,6 +203,10 @@ class Enpal extends utils.Adapter {
 			if (this.syncInterval) {
 				this.clearInterval(this.syncInterval);
 				this.syncInterval = null;
+			}
+			if (this.wallboxClient) {
+				this.wallboxClient.close();
+				this.wallboxClient = null;
 			}
 			callback();
 		} catch (error) {

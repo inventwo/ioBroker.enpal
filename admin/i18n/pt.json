@@ -1,9 +1,13 @@
 {
 	"enpal adapter settings": "Configurações do adaptador enpal",
+	"enpal_url": "URL da caixa Enpal",
+	"enpal_url_placeholder": "http://192.168.x.x",
 	"influx_bucket": "Bucket",
 	"influx_org": "ID da organização",
 	"influx_token": "Token de API",
 	"influx_url": "URL do InfluxDB",
 	"interval_s": "Intervalo de consulta (s)",
-	"show_sync_info": "Mostrar mensagens informativas para cada sincronização"
+	"show_sync_info": "Mostrar mensagens informativas para cada sincronização",
+	"wallbox_enabled": "Ativar controle de Wallbox",
+	"wallbox_section_header": "Controle de caixa de embutir"
 }

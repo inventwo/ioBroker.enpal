@@ -81,6 +81,11 @@ Typical examples (depending on your inverter and Enpal configuration):
 <!--
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (skvarel) Added optional wallbox control via Enpal Box web interface (Blazor SignalR)
+- (skvarel) New config options: wallbox_enabled (checkbox) and enpal_url for Enpal Box URL
+- (skvarel) New states under wallbox_control: start, stop, mode, currentMode, connectorStatus
+
 ### 0.2.2 (2026-06-05)
 - (skvarel) Migrated project rules from GitHub Copilot to Cursor rules
 - (skvarel) Updated @alcalzone/release-script to 5.2.1 to fix repository checker error E0036

@@ -1,0 +1,25 @@
+---
+description: Project overview and key files for ioBroker.enpal
+alwaysApply: true
+---
+
+# ioBroker.enpal
+
+Reads energy data from a local InfluxDB 2.x instance (Enpal solar system) and exposes ioBroker states.
+
+## Stack
+
+- JavaScript (no runtime build step)
+- Node.js >= 22
+- `@iobroker/adapter-core`
+- Admin UI: `admin/jsonConfig.json` (JSON-Config)
+- Data source: local InfluxDB, polled via HTTP/HTTPS
+
+## Key files
+
+- `main.js` — adapter logic (polling, Influx query, CSV parsing, states)
+- `io-package.json` — metadata, native config, `info.connection`
+- `admin/jsonConfig.json` — configuration UI
+- `admin/i18n/*.json` — admin translations
+- `.github/workflows/test-and-release.yml` — CI and release
+- `.cursor/rules/` — AI coding guidelines (replaces former Copilot instructions)

@@ -1,9 +1,13 @@
 {
 	"enpal adapter settings": "Adapterinstellingen voor enpal",
+	"enpal_url": "Enpal Box-URL",
+	"enpal_url_placeholder": "http://192.168.x.x",
 	"influx_bucket": "Bucket",
 	"influx_org": "Organisatie-ID",
 	"influx_token": "API-token",
 	"influx_url": "InfluxDB URL",
 	"interval_s": "Query-interval (s)",
-	"show_sync_info": "Toon infoberichten voor elke synchronisatie"
+	"show_sync_info": "Toon infoberichten voor elke synchronisatie",
+	"wallbox_enabled": "Wallbox-bediening inschakelen",
+	"wallbox_section_header": "Wallbox-bediening"
 }
