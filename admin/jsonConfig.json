@@ -106,7 +106,7 @@
 			"type": "panel",
 			"label": "tab_wallbox_help",
 			"icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iY3VycmVudENvbG9yIiBkPSJNMTUuMDcsMTEuMjVMMTQuMTcsMTIuMTdDMTMuNDUsMTIuODkgMTMsMTMuNSAxMywxNUgxMVYxNC41QzExLDEzLjM5IDExLjQ1LDEyLjM5IDEyLjE3LDExLjY3TDEzLjQxLDEwLjQxQzEzLjc4LDEwLjA1IDE0LDkuNTUgMTQsOUMxNCw3Ljg5IDEzLjEsNyAxMiw3QTIsMiAwIDAsMCAxMCw5SDhBNCw0IDAgMCwxIDEyLDVBNCs0IDAgMCwxIDE2LDlDMTYsOS44OCAxNS42NCwxMC42NyAxNS4wNywxMS4yNU0xMywxOUgxMVYxN0gxM00xMiwyQTEwLDEwIDAgMCwwIDIsMTJBMTAsMTAgMCAwLDAgMTIsMjJBMTAsMTAgMCAwLDAgMjIsMTJDMjIsNi40NyAxNy41LDIgMTIsMloiIC8+PC9zdmc+",
-			"hidden": "js: !data.wallbox_enabled",
+			"hidden": "!data.wallbox_enabled",
 			"items": {
 				"wallbox_help_intro": {
 					"type": "staticText",

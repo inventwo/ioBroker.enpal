@@ -137,11 +137,11 @@ enpal.0.wallbox_control.<state>
 	### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
-
 - (skvarel) Added read-only wallbox state automaticChargeStatus (automatic charge on plug-in, from /deviceMessages)
 - (skvarel) Fixed connectorStatus normalization for OCPP values (e.g. SuspendedEV instead of Suspendedev)
 - (skvarel) Documented wallbox connector status values in README
 - (skvarel) Added conditional wallbox help tab with data point and status documentation
+- (skvarel) Fixed wallbox help tab visibility: use json-config hidden formula without js: prefix
 
 ### 0.3.0 (2026-06-07)
 - (skvarel) Added optional wallbox control via Enpal Box web interface (Blazor SignalR)
