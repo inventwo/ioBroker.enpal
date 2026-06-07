@@ -1,4 +1,7 @@
 # Older changes
+## 0.1.10 (2026-04-04)
+- (skvarel) Fix prettier formatting in main.js
+
 ## 0.1.9 (2026-04-04)
 - (skvarel) Update node version to 24.x for check-and-lint workflow
 

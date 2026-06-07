@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "enpal",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "news": {
+      "0.4.0": {
+        "en": "Added read-only wallbox state automaticChargeStatus (automatic charge on plug-in, from /deviceMessages)\nFixed connectorStatus normalization for OCPP values (e.g. SuspendedEV instead of Suspendedev)\nDocumented wallbox connector status values in README\nAdded conditional wallbox help tab with data point and status documentation",
+        "de": "Hinzugefügter schreibgeschützter Wallbox-Status automaticChargeStatus (automatisches Laden beim Plug-in, von /deviceMessages)\nFixed connectorStatus-Normalisierung für OCPP-Werte (z. B. SuspendedEV statt Suspendedev)\nDokumentierte Statuswerte des Wallbox Connectors in README\nHinzufügen einer bedingte Wallbox-Hilfekarte mit Datenpunkt- und Statusdokumentation",
+        "ru": "Добавлено состояние стеновой коробки только для чтения AutomaticChargeStatus (автоматическая зарядка на плагине, из /deviceMessages)\nФиксированный разъемСтатусная нормализация для значений OCPP (например, SuspendedEV вместо Suspendedev)\nЗадокументированные значения состояния коннектора Wallbox в README\nДобавлена условная вкладка «Wallbox Help Tab» с документацией о точках данных и статусе",
+        "pt": "Adicionado somente leitura estado wallbox automáticoChargeStatus (carga automática no plug-in, de /dispositivoMessages)\nConector fixo Normalização do estado para os valores de OCPP (por exemplo, SuspendeuEV em vez de Suspendeuev)\nValores de estado do conector wallbox documentados em README\nAdicionado guia de ajuda condicional do wallbox com documentação do ponto de dados e status",
+        "nl": "Toegevoegd read-only wallbox status automaticChargeStatus (automatische lading bij plug-in, van /deviceMessages)\nVaste connectorStatus normalisatie voor OCPP-waarden (bv. SuspendedEV in plaats van Suspendedev)\nGedocumenteerde wallbox connector status waarden in README\nHulptabblad voorwaardelijke wallbox toegevoegd met datapunt en statusdocumentatie",
+        "fr": "Ajouté en lecture seule état wallbox automatiqueChargeStatus (charge automatique sur plug-in, depuis /deviceMessage)\nNormalisation de l'état des valeurs d'OCPP (par exemple, VEV suspendu au lieu de Vev suspendu)\nValeurs d'état du connecteur mural documenté dans README\nAjout de l'onglet d'aide wallbox conditionnel avec la documentation de point de données et d'état",
+        "it": "Aggiunto in sola lettura Wallbox stato automaticoChargeStatus (carica automatica sul plug-in, da /deviceMessages)\nConnettore fisso Normalizzazione dello stato per i valori OCPP (ad esempio SuspendedEV invece di Suspendedev)\nValori di stato del connettore a parete documentati in README\nAggiunto condizionale wallbox aiuto scheda con punto di dati e documentazione di stato",
+        "es": "Agregado solo de la caja de pared automática del estado del estado de solo lecturaChargeStatus (cargo automático en el plug-in, desde /deviceMessages)\nConector fijoStatus normalización para valores OCPP (por ejemplo, SuspendedEV en lugar de Suspendedev)\nValores de estado del conector de caja de pared documentados en README\nAñadido ventana condicional ayuda pestaña con punto de datos y documentación de estado",
+        "pl": "Dodano automaticChargeStatus (automatyczne ładowanie wtyczek, od / deviceMessages)\nNaprawiono normalizację stanu dla wartości OCPP (np. SuspendedEV zamiast Suspendedev)\nUdokumentowane wartości stanu złącza ściennego w README\nDodano warunkową tablicę pomocy z danymi i dokumentacją stanu",
+        "uk": "Додана читано-тільки стінкова скринька стан автоматичногоChargeStatus (автоматична зарядка на плагіні, від /deviceMessages)\nФіксований роз'єм Стандартизація значень OCPP (наприклад, SuspendedEV замість Suspendedev)\nЗначення стану роз'єму стінок у README\nДодана умовна стінкова скринька допоможе вкладка з точкою обробки даних та документацією стану",
+        "zh-cn": "添加只读的墙盒状态自动管理员状态(插件自动充电,来自/deviceMessages)\nOCPP 值的固定连接器状态常态化( 如 suspendEV 而不是 suspendev)\n在 README 中记录的墙盒连接器状态值\n添加带有数据点和状态文档的有条件的墙框帮助标签"
+      },
       "0.3.0": {
         "en": "Added optional wallbox control via Enpal Box web interface (Blazor SignalR)\nNew config option: wallbox_enabled (checkbox); Enpal Box URL is derived automatically from InfluxDB URL\nNew states under wallbox_control: start, stop, mode, currentMode, connectorStatus",
         "de": "Optionale Wallbox-Steuerung über das Enpal Box Webinterface (Blazor SignalR) hinzugefügt\nNeue Konfigurationsoption: wallbox enabled (Checkbox); Enpal Box URL wird automatisch von der InfluxDB URL abgeleitet\nNeue Zustände unter wallbox control: start, stop, mode, currentMode, connectorStatus",
@@ -80,19 +93,6 @@
         "pl": "Tytuł i opis edytowany",
         "uk": "Назва та опис редаговані",
         "zh-cn": "标题和说明已编辑"
-      },
-      "0.1.6": {
-        "en": "Added configurable option to show/hide InfluxDB sync info messages",
-        "de": "Konfigurierbare Option hinzugefügt, um InfluxDB Sync-Info-Nachrichten anzuzeigen/hide",
-        "ru": "Добавлена настраиваемая опция для отображения/скрытия сообщений синхронизации InfluxDB",
-        "pt": "Adicionada opção configurável para mostrar/esconder mensagens de informação de sincronização do InfluxDB",
-        "nl": "Toegevoegd configureerbare optie om InfluxDB sync infoberichten te tonen/verbergen",
-        "fr": "Ajout de l'option configurable pour afficher/masquer les messages d'info de synchronisation InfluxDB",
-        "it": "Aggiunta l'opzione configurabile per mostrare/hide InfluxDB sincronizzare i messaggi info",
-        "es": "Añadido opción configurable para mostrar/hierro InfluxDB sincronización de mensajes",
-        "pl": "Dodano konfigurowalną opcję wyświetlania / ukrywania komunikatów informacyjnych synchronizacji InfluxDB",
-        "uk": "Додано налаштування параметра для відображення/hide InfluxDB sync повідомлень",
-        "zh-cn": "添加可配置选项以显示/ hide InfluxDB 同步信息消息"
       }
     },
     "titleLang": {

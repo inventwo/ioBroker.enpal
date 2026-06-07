@@ -136,7 +136,7 @@ enpal.0.wallbox_control.<state>
 <!--
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.4.0 (2026-06-07)
 - (skvarel) Added read-only wallbox state automaticChargeStatus (automatic charge on plug-in, from /deviceMessages)
 - (skvarel) Fixed connectorStatus normalization for OCPP values (e.g. SuspendedEV instead of Suspendedev)
 - (skvarel) Documented wallbox connector status values in README
@@ -160,9 +160,6 @@ enpal.0.wallbox_control.<state>
 ### 0.2.0 (2026-04-06)
 - (skvarel) Updated minimum Node.js version requirement to >=22
 - (skvarel) Normalize unit display: "Percent" is now shown as "%"
-
-### 0.1.10 (2026-04-04)
-- (skvarel) Fix prettier formatting in main.js
 
 ## Older changes
 - [CHANGELOG_OLD.md](CHANGELOG_OLD.md)
