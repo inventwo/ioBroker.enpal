@@ -69,11 +69,12 @@ enpal.0.wallbox_control.<state>
 | `mode` | value | yes | yes | Set charge mode: `eco`, `solar`, `full`, or `smart` |
 | `currentMode` | text | yes | no | Current charge mode reported by the wallbox (e.g. `Eco`, `Solar`, `Full`) |
 | `connectorStatus` | text | yes | no | Connector status (e.g. `Available`, `Charging`, `Connected`) |
+| `automaticChargeStatus` | text | yes | no | Automatic charge on plug-in (`On` / `Off`; read-only, change via Enpal app) |
 
 **How it works**
 
 - **Control** (mode, start, stop): The adapter connects to `http://<enpal-box>/wallbox` via Blazor SignalR (same approach as the [Home Assistant Enpal integration](https://github.com/derolli1976/enpal)) and simulates button clicks.
-- **Status** (`currentMode`, `connectorStatus`): Read from the Enpal Box page `http://<enpal-box>/deviceMessages` (`Mode.Charge.Connector.1`, `Status.Wallbox.Connector.1`). Updated on each sync interval and after control actions.
+- **Status** (`currentMode`, `connectorStatus`, `automaticChargeStatus`): Read from the Enpal Box page `http://<enpal-box>/deviceMessages` (`Mode.Charge.Connector.1`, `Status.Wallbox.Connector.1`, `Wallbox.Settings.AutomaticChargeStatus.Connector.1`). Updated on each sync interval and after control actions.
 
 **Requirements**
 
@@ -83,7 +84,7 @@ enpal.0.wallbox_control.<state>
 
 **Not supported**
 
-- Wallbox settings only available in the Enpal app (e.g. automatic charge on plug-in) are not exposed as ioBroker states.
+- Changing automatic charge on plug-in from ioBroker (setting remains read-only; use the Enpal app to toggle)
 
 ## Installation
 
@@ -116,6 +117,10 @@ enpal.0.wallbox_control.<state>
 <!--
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+- (skvarel) Added read-only wallbox state automaticChargeStatus (automatic charge on plug-in, from /deviceMessages)
+
 ### 0.3.0 (2026-06-07)
 - (skvarel) Added optional wallbox control via Enpal Box web interface (Blazor SignalR)
 - (skvarel) New config option: wallbox_enabled (checkbox); Enpal Box URL is derived automatically from InfluxDB URL

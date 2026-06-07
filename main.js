@@ -139,6 +139,18 @@ class Enpal extends utils.Adapter {
 					def: '',
 				},
 			},
+			{
+				id: 'automaticChargeStatus',
+				common: {
+					name: 'Automatic charge on plug-in',
+					type: 'string',
+					role: 'text',
+					read: true,
+					write: false,
+					def: '',
+					states: { Off: 'Off', On: 'On' },
+				},
+			},
 		];
 
 		for (const { id, common } of statesDef) {
@@ -176,6 +188,20 @@ class Enpal extends utils.Adapter {
 			await this.setStateAsync(`${WALLBOX_CHANNEL}.connectorStatus`, { val: normalized, ack: true });
 			this.log.debug(`Wallbox connectorStatus from InfluxDB: ${normalized}`);
 		}
+
+		const autoChargeRow = rows.find(r =>
+			sanitize(r.field).match(/^Wallbox_Settings_AutomaticChargeStatus_Connector/i),
+		);
+		if (autoChargeRow) {
+			const raw = String(autoChargeRow.value).trim();
+			const lower = raw.toLowerCase();
+			const normalized =
+				lower === 'on' || lower === 'off'
+					? lower.charAt(0).toUpperCase() + lower.slice(1)
+					: raw.charAt(0).toUpperCase() + raw.slice(1).toLowerCase();
+			await this.setStateAsync(`${WALLBOX_CHANNEL}.automaticChargeStatus`, { val: normalized, ack: true });
+			this.log.debug(`Wallbox automaticChargeStatus from InfluxDB: ${normalized}`);
+		}
 	}
 
 	async _pollWallboxStatus() {
@@ -191,19 +217,27 @@ class Enpal extends utils.Adapter {
 			await this._applyWallboxReadings({
 				mode: this.wallboxClient.mode,
 				status: this.wallboxClient.status,
+				automaticChargeStatus: this.wallboxClient.automaticChargeStatus,
 			});
 		} catch (err) {
 			this.log.debug(`Wallbox status poll failed: ${err.message}`);
 		}
 	}
 
-	async _applyWallboxReadings({ mode, status }) {
+	async _applyWallboxReadings({ mode, status, automaticChargeStatus }) {
 		if (mode) {
 			await this.setStateAsync(`${WALLBOX_CHANNEL}.currentMode`, { val: mode, ack: true });
 		}
 		if (status) {
 			await this.setStateAsync(`${WALLBOX_CHANNEL}.connectorStatus`, { val: status, ack: true });
 			this.log.debug(`Wallbox connectorStatus: ${status}`);
+		}
+		if (automaticChargeStatus) {
+			await this.setStateAsync(`${WALLBOX_CHANNEL}.automaticChargeStatus`, {
+				val: automaticChargeStatus,
+				ack: true,
+			});
+			this.log.debug(`Wallbox automaticChargeStatus: ${automaticChargeStatus}`);
 		}
 	}
 
@@ -248,6 +282,7 @@ class Enpal extends utils.Adapter {
 				await this._applyWallboxReadings({
 					mode: this.wallboxClient.mode || MODE_LABELS[mode],
 					status: this.wallboxClient.status,
+					automaticChargeStatus: this.wallboxClient.automaticChargeStatus,
 				});
 				await this.setState(`${WALLBOX_CHANNEL}.mode`, { val: mode, ack: true });
 			}
