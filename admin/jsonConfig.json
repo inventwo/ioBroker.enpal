@@ -129,102 +129,20 @@
 					"size": 4,
 					"newLine": true
 				},
-				"_docWallboxStates": {
-					"type": "table",
-					"noDelete": true,
-					"compact": true,
+				"wallbox_help_states": {
+					"type": "staticText",
+					"text": "wallbox_help_states",
+					"format": "html",
 					"newLine": true,
 					"xs": 12,
 					"sm": 12,
 					"md": 12,
 					"lg": 12,
 					"xl": 12,
-					"default": [
-						{
-							"state": "start",
-							"read": "no",
-							"write": "yes",
-							"desc": {
-								"en": "Button — set to true to start charging",
-								"de": "Button — auf true setzen zum Starten"
-							}
-						},
-						{
-							"state": "stop",
-							"read": "no",
-							"write": "yes",
-							"desc": {
-								"en": "Button — set to true to stop charging",
-								"de": "Button — auf true setzen zum Stoppen"
-							}
-						},
-						{
-							"state": "mode",
-							"read": "yes",
-							"write": "yes",
-							"desc": {
-								"en": "Set charge mode: eco, solar, full, smart",
-								"de": "Lademodus setzen: eco, solar, full, smart"
-							}
-						},
-						{
-							"state": "currentMode",
-							"read": "yes",
-							"write": "no",
-							"desc": {
-								"en": "Current mode reported by the wallbox (e.g. Eco, Solar, Full)",
-								"de": "Aktueller Modus laut Wallbox (z. B. Eco, Solar, Full)"
-							}
-						},
-						{
-							"state": "connectorStatus",
-							"read": "yes",
-							"write": "no",
-							"desc": {
-								"en": "OCPP connector status (see table below)",
-								"de": "OCPP Connector-Status (siehe Tabelle unten)"
-							}
-						},
-						{
-							"state": "automaticChargeStatus",
-							"read": "yes",
-							"write": "no",
-							"desc": {
-								"en": "Automatic charge on plug-in: On / Off (read-only, change in Enpal app)",
-								"de": "Automatisches Laden beim Einstecken: On / Off (nur lesen — Enpal-App)"
-							}
-						}
-					],
-					"items": [
-						{
-							"title": "wallbox_doc_col_state",
-							"attr": "state",
-							"type": "text",
-							"readOnly": true,
-							"width": "18%"
-						},
-						{
-							"title": "wallbox_doc_col_read",
-							"attr": "read",
-							"type": "text",
-							"readOnly": true,
-							"width": "10%"
-						},
-						{
-							"title": "wallbox_doc_col_write",
-							"attr": "write",
-							"type": "text",
-							"readOnly": true,
-							"width": "10%"
-						},
-						{
-							"title": "wallbox_doc_col_desc",
-							"attr": "desc",
-							"type": "text",
-							"readOnly": true,
-							"width": "62%"
-						}
-					]
+					"style": {
+						"fontSize": "0.875rem",
+						"marginBottom": "16px"
+					}
 				},
 				"_wallboxModesHeader": {
 					"type": "header",
@@ -232,62 +150,20 @@
 					"size": 4,
 					"newLine": true
 				},
-				"_docWallboxModes": {
-					"type": "table",
-					"noDelete": true,
-					"compact": true,
+				"wallbox_help_modes": {
+					"type": "staticText",
+					"text": "wallbox_help_modes",
+					"format": "html",
 					"newLine": true,
 					"xs": 12,
 					"sm": 12,
 					"md": 12,
 					"lg": 12,
 					"xl": 12,
-					"default": [
-						{
-							"mode": "eco",
-							"desc": {
-								"en": "Eco — cost- or grid-optimised charging",
-								"de": "Eco — kosten- bzw. netzoptimiertes Laden"
-							}
-						},
-						{
-							"mode": "solar",
-							"desc": {
-								"en": "Solar — prefer PV surplus",
-								"de": "Solar — bevorzugt PV-Überschuss"
-							}
-						},
-						{
-							"mode": "full",
-							"desc": {
-								"en": "Full / fast — maximum charging power",
-								"de": "Full / Fast — maximale Ladeleistung"
-							}
-						},
-						{
-							"mode": "smart",
-							"desc": {
-								"en": "Smart — Enpal-managed charging strategy",
-								"de": "Smart — von Enpal gesteuerte Ladestrategie"
-							}
-						}
-					],
-					"items": [
-						{
-							"title": "wallbox_doc_col_mode",
-							"attr": "mode",
-							"type": "text",
-							"readOnly": true,
-							"width": "18%"
-						},
-						{
-							"title": "wallbox_doc_col_desc",
-							"attr": "desc",
-							"type": "text",
-							"readOnly": true,
-							"width": "82%"
-						}
-					]
+					"style": {
+						"fontSize": "0.875rem",
+						"marginBottom": "16px"
+					}
 				},
 				"_wallboxConnectorHeader": {
 					"type": "header",
@@ -295,104 +171,20 @@
 					"size": 4,
 					"newLine": true
 				},
-				"_docWallboxConnector": {
-					"type": "table",
-					"noDelete": true,
-					"compact": true,
+				"wallbox_help_connector": {
+					"type": "staticText",
+					"text": "wallbox_help_connector",
+					"format": "html",
 					"newLine": true,
 					"xs": 12,
 					"sm": 12,
 					"md": 12,
 					"lg": 12,
 					"xl": 12,
-					"default": [
-						{
-							"value": "Available",
-							"meaning": {
-								"en": "Connector free, nothing plugged in",
-								"de": "Anschluss frei, nichts eingesteckt"
-							}
-						},
-						{
-							"value": "Preparing",
-							"meaning": {
-								"en": "Vehicle connected, session not started yet",
-								"de": "Fahrzeug verbunden, Session noch nicht gestartet"
-							}
-						},
-						{
-							"value": "Charging",
-							"meaning": {
-								"en": "Active charging — power is flowing",
-								"de": "Aktives Laden — Strom fließt"
-							}
-						},
-						{
-							"value": "SuspendedEV",
-							"meaning": {
-								"en": "Vehicle paused (e.g. battery full); still plugged in",
-								"de": "Fahrzeug pausiert (z. B. Akku voll); noch eingesteckt"
-							}
-						},
-						{
-							"value": "SuspendedEVSE",
-							"meaning": {
-								"en": "Wallbox paused power (e.g. load management)",
-								"de": "Wallbox pausiert (z. B. Lastmanagement)"
-							}
-						},
-						{
-							"value": "Finishing",
-							"meaning": {
-								"en": "Session ended, cable still connected",
-								"de": "Session beendet, Kabel noch drin"
-							}
-						},
-						{
-							"value": "Reserved",
-							"meaning": {
-								"en": "Reserved for a future session",
-								"de": "Für künftige Session reserviert"
-							}
-						},
-						{
-							"value": "Unavailable",
-							"meaning": {
-								"en": "Temporarily not usable",
-								"de": "Vorübergehend nicht nutzbar"
-							}
-						},
-						{
-							"value": "Faulted",
-							"meaning": {
-								"en": "Error reported by the wallbox",
-								"de": "Fehler an der Wallbox"
-							}
-						},
-						{
-							"value": "Connected",
-							"meaning": {
-								"en": "Vehicle connected (Enpal-specific)",
-								"de": "Fahrzeug verbunden (Enpal-spezifisch)"
-							}
-						}
-					],
-					"items": [
-						{
-							"title": "wallbox_doc_col_value",
-							"attr": "value",
-							"type": "text",
-							"readOnly": true,
-							"width": "22%"
-						},
-						{
-							"title": "wallbox_doc_col_meaning",
-							"attr": "meaning",
-							"type": "text",
-							"readOnly": true,
-							"width": "78%"
-						}
-					]
+					"style": {
+						"fontSize": "0.875rem",
+						"marginBottom": "8px"
+					}
 				},
 				"wallbox_help_flow": {
 					"type": "staticText",
@@ -433,8 +225,10 @@
 				},
 				"wallbox_help_readme": {
 					"type": "staticText",
-					"text": "wallbox_help_readme",
-					"format": "html",
+					"text": {
+						"en": "For complete documentation, click here below:<br><br>• <a href=\"https://github.com/inventwo/ioBroker.enpal/blob/main/README.md\">Adapter documentation</a>",
+						"de": "Für eine vollständige Dokumentation klicke hier unten:<br><br>• <a href=\"https://github.com/inventwo/ioBroker.enpal/blob/main/README.md\">Adapter-Dokumentation</a>"
+					},
 					"newLine": true,
 					"xs": 12,
 					"sm": 12,
@@ -442,7 +236,7 @@
 					"lg": 12,
 					"xl": 12,
 					"style": {
-						"fontSize": "0.875rem",
+						"fontSize": "1rem",
 						"marginBottom": "16px"
 					}
 				},
@@ -465,7 +259,6 @@
 				"wallbox_help_outro": {
 					"type": "staticText",
 					"text": "Team inventwo •  <a href=\"https://github.com/inventwo\">https://github.com/inventwo</a> • by skvarel",
-					"format": "html",
 					"newLine": true,
 					"sm": 12,
 					"xs": 12,
@@ -473,6 +266,8 @@
 					"lg": 3,
 					"xl": 3,
 					"style": {
+						"borderTop": "0px solid",
+						"borderColor": "",
 						"marginTop": "0px",
 						"paddingTop": "5px",
 						"fontSize": "14px",
