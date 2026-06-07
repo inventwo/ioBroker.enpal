@@ -109,13 +109,13 @@ enpal.0.wallbox_control.<state>
 
 1. Install the adapter from the ioBroker admin interface
 2. Create a new instance
-3. Configure the following settings:
+3. Configure the following settings (tab **Settings**):
    - **InfluxDB URL**: Address of your local InfluxDB (e.g. `http://192.168.1.100:8086`)
    - **API Token**: Your InfluxDB API token (read access is sufficient)
    - **Organisation ID**: Your InfluxDB organisation
    - **Bucket**: The bucket Enpal writes to (typically `enpal` or similar)
    - **Update Interval**: Data refresh interval in seconds (default: `60`)
-   - **Wallbox control** (optional): Enable to create `wallbox_control` states and allow charge mode / start / stop via the Enpal Box web UI (no extra URL — host is taken from the InfluxDB URL)
+   - **Wallbox control** (optional): Enable to create `wallbox_control` states and allow charge mode / start / stop via the Enpal Box web UI (no extra URL — host is taken from the InfluxDB URL). When enabled, the **Wallbox help** tab explains data points, charge modes, and connector status values.
 4. Save and start the instance
 
 ### How to find your InfluxDB credentials
@@ -141,6 +141,7 @@ enpal.0.wallbox_control.<state>
 - (skvarel) Added read-only wallbox state automaticChargeStatus (automatic charge on plug-in, from /deviceMessages)
 - (skvarel) Fixed connectorStatus normalization for OCPP values (e.g. SuspendedEV instead of Suspendedev)
 - (skvarel) Documented wallbox connector status values in README
+- (skvarel) Admin UI: settings tab and conditional wallbox help tab with data point and status documentation
 
 ### 0.3.0 (2026-06-07)
 - (skvarel) Added optional wallbox control via Enpal Box web interface (Blazor SignalR)

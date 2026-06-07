@@ -1,92 +1,198 @@
 {
 	"i18n": true,
-	"type": "panel",
+	"type": "tabs",
 	"items": {
-		"_info": {
-			"type": "header",
-			"text": "ENPAL InfluxDB Configuration",
-			"size": 3
+		"_settings": {
+			"type": "panel",
+			"label": "tab_settings",
+			"icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iY3VycmVudENvbG9yIiBkPSJNMTIsMTUuNUEzLjUsMy41IDAgMCwxIDguNSwxMkEzLjUsMy41IDAgMCwxIDEyLDguNUEzLjUsMy41IDAgMCwxIDE1LjUsMTJBMy41LDMuNSAwIDAsMSAxMiwxNS41TTE5LjQzLDEyLjk3QzE5LjQ3LDEyLjY1IDE5LjUsMTIuMzMgMTkuNSwxMkMxOS41LDExLjY3IDE5LjQ3LDExLjM0IDE5LjQzLDExTDIxLjU0LDkuMzdDMjEuNzMsOS4yMiAyMS43OCw4Ljk1IDIxLjY2LDguNzNMMTkuNjYsNS4yN0MxOS41NCw1LjA1IDE5LjI3LDQuOTYgMTkuMDUsNS4wNUwxNi41Niw2LjA1QzE2LjA0LDUuNjYgMTUuNSw1LjMyIDE0Ljg3LDUuMDdMMTQuNSwyLjQyQzE0LjQ2LDIuMTggMTQuMjUsMiAxNCwySDEwQzkuNzUsMiA5LjU0LDIuMTggOS41LDIuNDJMOS4xMyw1LjA3QzguNSw1LjMyIDcuOTYsNS42NiA3LjQ0LDYuMDVMNC45NSw1LjA1QzQuNzMsNC45NiA0LjQ2LDUuMDUgNC4zNCw1LjI3TDIuMzQsOC43M0MyLjIxLDguOTUgMi4yNyw5LjIyIDIuNDYsOS4zN0w0LjU3LDExQzQuNTMsMTEuMzQgNC41LDExLjY3IDQuNSwxMkM0LjUsMTIuMzMgNC41MywxMi42NSA0LjU3LDEyLjk3TDIuNDYsMTQuNjNDMi4yNywxNC43OCAyLjIxLDE1LjA1IDIuMzQsMTUuMjdMNC4zNCwxOC43M0M0LjQ2LDE4Ljk1IDQuNzMsMTkuMDMgNC45NSwxOC45NUw3LjQ0LDE3Ljk0QzcuOTYsMTguMzQgOC41LDE4LjY4IDkuMTMsMTguOTNMOS41LDIxLjU4QzkuNTQsMjEuODIgOS43NSwyMiAxMCwyMkgxNEMxNC4yNSwyMiAxNC40NiwyMS44MiAxNC41LDIxLjU4TDE0Ljg3LDE4LjkzQzE1LjUsMTguNjcgMTYuMDQsMTguMzQgMTYuNTYsMTcuOTRMMTkuMDUsMTguOTVDMTkuMjcsMTkuMDMgMTkuNTQsMTguOTUgMTkuNjYsMTguNzNMMjEuNjYsMTUuMjdDMjEuNzgsMTUuMDUgMjEuNzMsMTQuNzggMjEuNTQsMTQuNjNMMTkuNDMsMTIuOTdaIiAvPjwvc3ZnPg==",
+			"items": {
+				"_info": {
+					"type": "header",
+					"text": "ENPAL InfluxDB Configuration",
+					"size": 3
+				},
+				"influx_url": {
+					"type": "text",
+					"label": "influx_url",
+					"help": "influx_url_help",
+					"newLine": true,
+					"default": "http://localhost:8086",
+					"xs": 12,
+					"sm": 6,
+					"md": 6,
+					"lg": 6,
+					"xl": 6
+				},
+				"influx_token": {
+					"type": "password",
+					"label": "influx_token",
+					"help": "influx_token_help",
+					"newLine": true,
+					"xs": 12,
+					"sm": 6,
+					"md": 6,
+					"lg": 6,
+					"xl": 6
+				},
+				"influx_org": {
+					"type": "text",
+					"label": "influx_org",
+					"help": "influx_org_help",
+					"newLine": true,
+					"xs": 12,
+					"sm": 6,
+					"md": 6,
+					"lg": 6,
+					"xl": 6
+				},
+				"influx_bucket": {
+					"type": "text",
+					"label": "influx_bucket",
+					"help": "influx_bucket_help",
+					"newLine": true,
+					"xs": 12,
+					"sm": 6,
+					"md": 6,
+					"lg": 6,
+					"xl": 6
+				},
+				"interval_s": {
+					"type": "number",
+					"label": "interval_s",
+					"help": "interval_s_help",
+					"newLine": true,
+					"default": 60,
+					"min": 5,
+					"xs": 12,
+					"sm": 6,
+					"md": 6,
+					"lg": 6,
+					"xl": 6
+				},
+				"show_sync_info": {
+					"type": "checkbox",
+					"label": "show_sync_info",
+					"help": "show_sync_info_help",
+					"newLine": true,
+					"default": false,
+					"xs": 12,
+					"sm": 6,
+					"md": 6,
+					"lg": 6,
+					"xl": 6
+				},
+				"_wallbox_header": {
+					"type": "header",
+					"text": "wallbox_section_header",
+					"size": 4,
+					"newLine": true
+				},
+				"wallbox_enabled": {
+					"type": "checkbox",
+					"label": "wallbox_enabled",
+					"help": "wallbox_enabled_help",
+					"newLine": true,
+					"default": false,
+					"xs": 12,
+					"sm": 6,
+					"md": 6,
+					"lg": 6,
+					"xl": 6
+				}
+			}
 		},
-		"influx_url": {
-			"type": "text",
-			"label": "influx_url",
-			"newLine": true,
-			"default": "http://localhost:8086",
-			"xs": 12,
-			"sm": 6,
-			"md": 6,
-			"lg": 6,
-			"xl": 6
-		},
-		"influx_token": {
-			"type": "password",
-			"label": "influx_token",
-			"newLine": true,
-			"xs": 12,
-			"sm": 6,
-			"md": 6,
-			"lg": 6,
-			"xl": 6
-		},
-		"influx_org": {
-			"type": "text",
-			"label": "influx_org",
-			"newLine": true,
-			"xs": 12,
-			"sm": 6,
-			"md": 6,
-			"lg": 6,
-			"xl": 6
-		},
-		"influx_bucket": {
-			"type": "text",
-			"label": "influx_bucket",
-			"newLine": true,
-			"xs": 12,
-			"sm": 6,
-			"md": 6,
-			"lg": 6,
-			"xl": 6
-		},
-		"interval_s": {
-			"type": "number",
-			"label": "interval_s",
-			"newLine": true,
-			"default": 60,
-			"min": 5,
-			"xs": 12,
-			"sm": 6,
-			"md": 6,
-			"lg": 6,
-			"xl": 6
-		},
-		"show_sync_info": {
-			"type": "checkbox",
-			"label": "show_sync_info",
-			"newLine": true,
-			"default": false,
-			"xs": 12,
-			"sm": 6,
-			"md": 6,
-			"lg": 6,
-			"xl": 6
-		},
-		"_wallbox_header": {
-			"type": "header",
-			"text": "wallbox_section_header",
-			"size": 4,
-			"newLine": true
-		},
-		"wallbox_enabled": {
-			"type": "checkbox",
-			"label": "wallbox_enabled",
-			"newLine": true,
-			"default": false,
-			"xs": 12,
-			"sm": 6,
-			"md": 6,
-			"lg": 6,
-			"xl": 6
+		"_wallbox_help": {
+			"type": "panel",
+			"label": "tab_wallbox_help",
+			"icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iY3VycmVudENvbG9yIiBkPSJNMTUuMDcsMTEuMjVMMTQuMTcsMTIuMTdDMTMuNDUsMTIuODkgMTMsMTMuNSAxMywxNUgxMVYxNC41QzExLDEzLjM5IDExLjQ1LDEyLjM5IDEyLjE3LDExLjY3TDEzLjQxLDEwLjQxQzEzLjc4LDEwLjA1IDE0LDkuNTUgMTQsOUMxNCw3Ljg5IDEzLjEsNyAxMiw3QTIsMiAwIDAsMCAxMCw5SDhBNCw0IDAgMCwxIDEyLDVBNCs0IDAgMCwxIDE2LDlDMTYsOS44OCAxNS42NCwxMC42NyAxNS4wNywxMS4yNU0xMywxOUgxMVYxN0gxM00xMiwyQTEwLDEwIDAgMCwwIDIsMTJBMTAsMTAgMCAwLDAgMTIsMjJBMTAsMTAgMCAwLDAgMjIsMTJDMjIsNi40NyAxNy41LDIgMTIsMloiIC8+PC9zdmc+",
+			"hidden": "js: !data.wallbox_enabled",
+			"items": {
+				"wallbox_help_intro": {
+					"type": "staticText",
+					"text": "wallbox_help_intro",
+					"newLine": true,
+					"xs": 12,
+					"sm": 12,
+					"md": 12,
+					"lg": 12,
+					"xl": 12,
+					"style": {
+						"fontSize": "16px",
+						"marginBottom": "20px"
+					}
+				},
+				"wallbox_help_states": {
+					"type": "staticText",
+					"text": "wallbox_help_states",
+					"newLine": true,
+					"xs": 12,
+					"sm": 12,
+					"md": 12,
+					"lg": 12,
+					"xl": 12,
+					"style": {
+						"fontSize": "14px",
+						"marginBottom": "20px"
+					}
+				},
+				"wallbox_help_modes": {
+					"type": "staticText",
+					"text": "wallbox_help_modes",
+					"newLine": true,
+					"xs": 12,
+					"sm": 12,
+					"md": 12,
+					"lg": 12,
+					"xl": 12,
+					"style": {
+						"fontSize": "14px",
+						"marginBottom": "20px"
+					}
+				},
+				"wallbox_help_connector": {
+					"type": "staticText",
+					"text": "wallbox_help_connector",
+					"newLine": true,
+					"xs": 12,
+					"sm": 12,
+					"md": 12,
+					"lg": 12,
+					"xl": 12,
+					"style": {
+						"fontSize": "14px",
+						"marginBottom": "20px"
+					}
+				},
+				"wallbox_help_automation": {
+					"type": "staticText",
+					"text": "wallbox_help_automation",
+					"newLine": true,
+					"xs": 12,
+					"sm": 12,
+					"md": 12,
+					"lg": 12,
+					"xl": 12,
+					"style": {
+						"fontSize": "14px",
+						"marginBottom": "20px"
+					}
+				},
+				"wallbox_help_readme": {
+					"type": "staticText",
+					"text": "wallbox_help_readme",
+					"newLine": true,
+					"xs": 12,
+					"sm": 12,
+					"md": 12,
+					"lg": 12,
+					"xl": 12,
+					"style": {
+						"fontSize": "14px",
+						"marginTop": "10px"
+					}
+				}
+			}
 		}
 	}
 }
