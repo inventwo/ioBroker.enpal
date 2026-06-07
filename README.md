@@ -116,7 +116,7 @@ enpal.0.wallbox_control.<state>
 <!--
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.3.0 (2026-06-07)
 - (skvarel) Added optional wallbox control via Enpal Box web interface (Blazor SignalR)
 - (skvarel) New config option: wallbox_enabled (checkbox); Enpal Box URL is derived automatically from InfluxDB URL
 - (skvarel) New states under wallbox_control: start, stop, mode, currentMode, connectorStatus
@@ -137,9 +137,6 @@ enpal.0.wallbox_control.<state>
 
 ### 0.1.10 (2026-04-04)
 - (skvarel) Fix prettier formatting in main.js
-
-### 0.1.9 (2026-04-04)
-- (skvarel) Update node version to 24.x for check-and-lint workflow
 
 ## Older changes
 - [CHANGELOG_OLD.md](CHANGELOG_OLD.md)
