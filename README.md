@@ -68,13 +68,32 @@ enpal.0.wallbox_control.<state>
 | `stop` | button | no | yes | Stop charging (set to `true` to trigger) |
 | `mode` | value | yes | yes | Set charge mode: `eco`, `solar`, `full`, or `smart` |
 | `currentMode` | text | yes | no | Current charge mode reported by the wallbox (e.g. `Eco`, `Solar`, `Full`) |
-| `connectorStatus` | text | yes | no | Connector status (e.g. `Available`, `Charging`, `Connected`) |
+| `connectorStatus` | text | yes | no | OCPP connector status from the wallbox (see [Connector status values](#connector-status-values)) |
 | `automaticChargeStatus` | text | yes | no | Automatic charge on plug-in (`On` / `Off`; read-only, change via Enpal app) |
 
 **How it works**
 
 - **Control** (mode, start, stop): The adapter connects to `http://<enpal-box>/wallbox` via Blazor SignalR (same approach as the [Home Assistant Enpal integration](https://github.com/derolli1976/enpal)) and simulates button clicks.
 - **Status** (`currentMode`, `connectorStatus`, `automaticChargeStatus`): Read from the Enpal Box page `http://<enpal-box>/deviceMessages` (`Mode.Charge.Connector.1`, `Status.Wallbox.Connector.1`, `Wallbox.Settings.AutomaticChargeStatus.Connector.1`). Updated on each sync interval and after control actions.
+
+#### Connector status values
+
+`connectorStatus` reports the [OCPP](https://www.openchargealliance.org/) connector status from the Enpal/StarCharge wallbox. Values are normalized to canonical spelling (e.g. `SuspendedEV`, not `Suspendedev`).
+
+| Value | Meaning |
+|-------|---------|
+| `Available` | Connector free, no vehicle plugged in |
+| `Preparing` | Vehicle connected, session not started yet (no power flowing) |
+| `Charging` | Active charging — power is being delivered |
+| `SuspendedEV` | Vehicle paused charging (e.g. battery full, BMS limit); still plugged in |
+| `SuspendedEVSE` | Wallbox paused power delivery (e.g. load management); vehicle still connected |
+| `Finishing` | Session ended, cable still connected or vehicle not yet moved |
+| `Reserved` | Connector reserved for a future session |
+| `Unavailable` | Temporarily not usable (maintenance, disabled) |
+| `Faulted` | Error reported by the wallbox |
+| `Connected` | Vehicle connected (Enpal-specific; may appear instead of or before other states) |
+
+> **Note:** After a full charge you will often see `SuspendedEV` — this is normal. The car stopped drawing power; unplug or restart charging if needed.
 
 **Requirements**
 
@@ -120,6 +139,8 @@ enpal.0.wallbox_control.<state>
 ### **WORK IN PROGRESS**
 
 - (skvarel) Added read-only wallbox state automaticChargeStatus (automatic charge on plug-in, from /deviceMessages)
+- (skvarel) Fixed connectorStatus normalization for OCPP values (e.g. SuspendedEV instead of Suspendedev)
+- (skvarel) Documented wallbox connector status values in README
 
 ### 0.3.0 (2026-06-07)
 - (skvarel) Added optional wallbox control via Enpal Box web interface (Blazor SignalR)

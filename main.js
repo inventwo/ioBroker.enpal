@@ -4,7 +4,7 @@ const utils = require('@iobroker/adapter-core');
 const http = require('node:http');
 const https = require('node:https');
 const { URL } = require('node:url');
-const { WallboxBlazorClient } = require('./lib/wallbox');
+const { WallboxBlazorClient, normalizeConnectorStatus } = require('./lib/wallbox');
 
 const WALLBOX_CHANNEL = 'wallbox_control';
 const VALID_MODES = ['eco', 'solar', 'full', 'smart'];
@@ -137,6 +137,18 @@ class Enpal extends utils.Adapter {
 					read: true,
 					write: false,
 					def: '',
+					states: {
+						Available: 'Available',
+						Preparing: 'Preparing',
+						Charging: 'Charging',
+						SuspendedEV: 'Suspended EV',
+						SuspendedEVSE: 'Suspended EVSE',
+						Finishing: 'Finishing',
+						Reserved: 'Reserved',
+						Unavailable: 'Unavailable',
+						Faulted: 'Faulted',
+						Connected: 'Connected',
+					},
 				},
 			},
 			{
@@ -183,10 +195,11 @@ class Enpal extends utils.Adapter {
 		// Connector status from InfluxDB (Status.Wallbox.Connector.* or Status.Charge.Connector.*)
 		const statusRow = rows.find(r => sanitize(r.field).match(/^Status_(Wallbox_|Charge_)?Connector/i));
 		if (statusRow) {
-			const raw = String(statusRow.value);
-			const normalized = raw.charAt(0).toUpperCase() + raw.slice(1).toLowerCase();
-			await this.setStateAsync(`${WALLBOX_CHANNEL}.connectorStatus`, { val: normalized, ack: true });
-			this.log.debug(`Wallbox connectorStatus from InfluxDB: ${normalized}`);
+			const normalized = normalizeConnectorStatus(String(statusRow.value));
+			if (normalized) {
+				await this.setStateAsync(`${WALLBOX_CHANNEL}.connectorStatus`, { val: normalized, ack: true });
+				this.log.debug(`Wallbox connectorStatus from InfluxDB: ${normalized}`);
+			}
 		}
 
 		const autoChargeRow = rows.find(r =>
