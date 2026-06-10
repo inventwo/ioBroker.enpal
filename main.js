@@ -23,7 +23,32 @@ class Enpal extends utils.Adapter {
 		this.wallboxClient = null;
 	}
 
+	async ensureAdapterRootMeta() {
+		const rootId = this.name;
+		const titleLang = this.ioPack?.common?.titleLang || {};
+		const metaObject = {
+			type: 'meta',
+			common: {
+				name: titleLang[this.language] || titleLang.en || rootId,
+				type: 'meta.folder',
+			},
+			native: {},
+		};
+
+		const existing = await this.getForeignObjectAsync(rootId);
+		if (!existing) {
+			await this.setForeignObjectAsync(rootId, metaObject);
+		} else if (existing.type !== 'meta') {
+			await this.extendForeignObjectAsync(rootId, {
+				type: 'meta',
+				common: metaObject.common,
+			});
+		}
+	}
+
 	async onReady() {
+		await this.ensureAdapterRootMeta();
+
 		const influxUrl = this.config.influx_url || 'http://localhost:8086';
 		const influxToken = this.config.influx_token || '';
 		const influxOrg = this.config.influx_org || '';
