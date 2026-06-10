@@ -136,7 +136,7 @@ enpal.0.wallbox_control.<state>
 <!--
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.4.1 (2026-06-10)
 - (skvarel) Typed adapter and instance root namespaces as meta folders for a cleaner object tree
 
 ### 0.4.0 (2026-06-07)
@@ -159,10 +159,6 @@ enpal.0.wallbox_control.<state>
 ### 0.2.1 (2026-05-25)
 - (skvarel) Added link to CHANGELOG_OLD.md at readme 
 - (skvarel) Updated @alcalzone/release-script and related plugins
-
-### 0.2.0 (2026-04-06)
-- (skvarel) Updated minimum Node.js version requirement to >=22
-- (skvarel) Normalize unit display: "Percent" is now shown as "%"
 
 ## Older changes
 - [CHANGELOG_OLD.md](CHANGELOG_OLD.md)

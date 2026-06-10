@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "enpal",
-    "version": "0.4.0",
+    "version": "0.4.1",
     "news": {
+      "0.4.1": {
+        "en": "Typed adapter and instance root namespaces as meta folders for a cleaner object tree",
+        "de": "Typisierte Adapter- und Instanz-Root-Namespaces als Meta-Ordner für einen saubereren Objektbaum",
+        "ru": "Типизированный адаптер и пространства имен корня экземпляра в качестве мета-папки для более чистого дерева объектов",
+        "pt": "Adaptador digitado e espaços de nomes de raiz de instância como metapastas para uma árvore de objetos mais limpa",
+        "nl": "Getypte adapter en instantie root namespaces als meta mappen voor een schonere object boom",
+        "fr": "Adaptateur dactylographié et espaces de noms racine d'instance comme dossiers méta pour un arbre d'objets plus propre",
+        "it": "Adattatore di tipo e namespace di istanza come meta cartelle per un albero di oggetti più pulito",
+        "es": "Adaptador e instancias de root namespaces como metáforas para un árbol de objeto más limpio",
+        "pl": "Wpisany adapter i instancja root namespaces jako meta foldery dla czystszego drzewa obiektów",
+        "uk": "Виданий адаптер і екземпляр кореневих просторів імен, як мета-паки для дерева об'єкта очищення",
+        "zh-cn": "键入适配器和实例根命名空间作为更清洁对象树的元文件夹"
+      },
       "0.4.0": {
         "en": "Added read-only wallbox state automaticChargeStatus (automatic charge on plug-in, from /deviceMessages)\nFixed connectorStatus normalization for OCPP values (e.g. SuspendedEV instead of Suspendedev)\nDocumented wallbox connector status values in README\nAdded conditional wallbox help tab with data point and status documentation",
         "de": "Hinzugefügter schreibgeschützter Wallbox-Status automaticChargeStatus (automatisches Laden beim Plug-in, von /deviceMessages)\nFixed connectorStatus-Normalisierung für OCPP-Werte (z. B. SuspendedEV statt Suspendedev)\nDokumentierte Statuswerte des Wallbox Connectors in README\nHinzufügen einer bedingte Wallbox-Hilfekarte mit Datenpunkt- und Statusdokumentation",
@@ -80,19 +93,6 @@
         "pl": "Napraw ładniejsze formatowanie w main.js",
         "uk": "Виправлено форматування претенця в main.js",
         "zh-cn": "修正主.js中较漂亮的格式"
-      },
-      "0.1.7": {
-        "en": "Title and description edited",
-        "de": "Titel und Beschreibung bearbeitet",
-        "ru": "Название и описание отредактированы",
-        "pt": "Título e descrição editados",
-        "nl": "Titel en beschrijving bewerkt",
-        "fr": "Titre et description édités",
-        "it": "Titolo e descrizione a cura",
-        "es": "Título y descripción editados",
-        "pl": "Tytuł i opis edytowany",
-        "uk": "Назва та опис редаговані",
-        "zh-cn": "标题和说明已编辑"
       }
     },
     "titleLang": {

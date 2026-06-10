@@ -1,4 +1,8 @@
 # Older changes
+## 0.2.0 (2026-04-06)
+- (skvarel) Updated minimum Node.js version requirement to >=22
+- (skvarel) Normalize unit display: "Percent" is now shown as "%"
+
 ## 0.1.10 (2026-04-04)
 - (skvarel) Fix prettier formatting in main.js
 
