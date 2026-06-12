@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "enpal",
-    "version": "0.4.1",
+    "version": "0.4.2",
     "news": {
+      "0.4.2": {
+        "en": "Fixed missing wallbox_help_readme translation in English and German admin UI\nReplaced plain timers in wallbox client with adapter-core setInterval, setTimeout and delay helpers\nUpdated iobroker/types for js-controller 7.1 compatibility",
+        "de": "Fehlende Wallbox help readme-Übersetzung in Englisch und Deutsch admin UI behoben\nErsetzte einfache Timer im Wallbox-Client durch Adapter-Core-SetInterval, SetTimeout und Verzögerungshelfer\nAktualisierte iobroker/types für js-controller 7.1 Kompatibilität",
+        "ru": "Исправленный отсутствующий перевод wallbox help readme на английский и немецкий языки\nЗамена простых таймеров в клиенте Wallbox с адаптерно-ядерным набором Interval, setTimeout и помощниками задержки\nОбновленный iobroker/типы для совместимости js-контроллера 7.1",
+        "pt": "Corrigido faltando wallbox help readme tradução em Inglês e Alemão administrador UI\nTemporizadores simples substituídos no cliente wallbox com o conjunto adaptador-coreInterval, setTimeout e auxiliares de atraso\nIobroker/tipos atualizados para compatibilidade com js-controller 7.1",
+        "nl": "Vaste ontbrekende wallbox help readme vertaling in het Engels en Duits admin UI\nGewoonte timers in wallbox client vervangen door adapter-core setInterval, setTimeout en delay helpers\nBijgewerkte iobroker/types voor js-controller 7.1 compatibiliteit",
+        "fr": "Correction manquante wallbox help readme traduction en anglais et allemand admin UI\nRemplace les minuteurs simples dans le client wallbox avec adaptateur-core setIntervalle, setTimeout et aide au retard\nIobroker/types mis à jour pour la compatibilité js-controller 7.1",
+        "it": "Risolto mancante wallbox help readme traduzione in inglese e tedesco admin UI\nSostituiti timer semplici nel client wallbox con set adattatore-coreInterval, setAiuto di timeout e ritardo\nIbroker/tipi aggiornati per la compatibilità js-controller 7.1",
+        "es": "Traducción de Wallbox help readme en inglés y alemán UI\nReemplazados temporizadores simples en Wallbox cliente con adaptador-core setInterval, setTimeout y ayudantes de demora\nActualizado iobroker/tipos para compatibilidad js-controller 7.1",
+        "pl": "Naprawiono brakujące tłumaczenie tapety _ help _ readme w języku angielskim i niemieckim admin UI\nZastąpione proste timery w klienta wallbox z setter- core setInterval, setTimeout i pomocy opóźnienia\nAktualizacja iobrokera / typów dla sterownika js- 7.1 kompatybilności",
+        "uk": "Виправлено відсутній букбокс help readme переклад англійською та німецькою admin UI\nПереміщені звичайні таймери в настінній коробці клієнт з адаптером-core setInterval, setTimeout і затримкою помічників\nОновлено iobroker/типи для js-controller 7.1 сумісність",
+        "zh-cn": "固定缺失的墙框  help readme 英文和德语管理员 UI 翻译\n用适配器核心设定替换了墙盒客户端中的纯时器 Interval, setTimeout 和延时帮助器\n更新 js 控制器 7.1 兼容性的 io 经纪/ 类型"
+      },
       "0.4.1": {
         "en": "Typed adapter and instance root namespaces as meta folders for a cleaner object tree",
         "de": "Typisierte Adapter- und Instanz-Root-Namespaces als Meta-Ordner für einen saubereren Objektbaum",
@@ -80,19 +93,6 @@
         "pl": "Aktualizacja minimalnego wymogu wersji Node.js do > = 22\nWyświetlacz jednostki normalizującej: \"Procent\" jest teraz pokazywany jako \"%\"",
         "uk": "Оновлена мінімальна вимога версії Node.js до >=22\nНормалізація дисплея блока: \"Попередня\" тепер відображається як \"%\"",
         "zh-cn": "将最小节点\n规范化单位显示 : “ percent” 现在显示为 “%% ”"
-      },
-      "0.1.10": {
-        "en": "Fix prettier formatting in main.js",
-        "de": "Reparieren prettier Formatierung in main.js",
-        "ru": "Исправьте красивое форматирование в main.js",
-        "pt": "Corrigir formatação mais bonita no main.js",
-        "nl": "Fix mooiere formattering in main.js",
-        "fr": "Correction du formatage plus joli dans main.js",
-        "it": "Fissare la formattazione più bella in main.js",
-        "es": "Fijar formato más bonito en main.js",
-        "pl": "Napraw ładniejsze formatowanie w main.js",
-        "uk": "Виправлено форматування претенця в main.js",
-        "zh-cn": "修正主.js中较漂亮的格式"
       }
     },
     "titleLang": {

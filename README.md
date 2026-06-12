@@ -136,7 +136,7 @@ enpal.0.wallbox_control.<state>
 <!--
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.4.2 (2026-06-12)
 - (skvarel) Fixed missing wallbox_help_readme translation in English and German admin UI
 - (skvarel) Replaced plain timers in wallbox client with adapter-core setInterval, setTimeout and delay helpers
 - (skvarel) Updated iobroker/types for js-controller 7.1 compatibility
@@ -160,10 +160,6 @@ enpal.0.wallbox_control.<state>
 - (skvarel) Updated @alcalzone/release-script to 5.2.1 to fix repository checker error E0036
 - (skvarel) Updated @tsconfig/node22 to 22.0.5
 - (skvarel) Fixed mixed indentation in admin/jsonConfig.json
-
-### 0.2.1 (2026-05-25)
-- (skvarel) Added link to CHANGELOG_OLD.md at readme 
-- (skvarel) Updated @alcalzone/release-script and related plugins
 
 ## Older changes
 - [CHANGELOG_OLD.md](CHANGELOG_OLD.md)
