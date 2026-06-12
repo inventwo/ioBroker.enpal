@@ -225,10 +225,7 @@
 				},
 				"wallbox_help_readme": {
 					"type": "staticText",
-					"text": {
-						"en": "For complete documentation, click here below:<br><br>• <a href=\"https://github.com/inventwo/ioBroker.enpal/blob/main/README.md\">Adapter documentation</a>",
-						"de": "Für eine vollständige Dokumentation klicke hier unten:<br><br>• <a href=\"https://github.com/inventwo/ioBroker.enpal/blob/main/README.md\">Adapter-Dokumentation</a>"
-					},
+					"text": "wallbox_help_readme",
 					"newLine": true,
 					"xs": 12,
 					"sm": 12,

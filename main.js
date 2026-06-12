@@ -94,7 +94,7 @@ class Enpal extends utils.Adapter {
 		}
 
 		this.log.info(`Wallbox control enabled. Enpal Box URL: ${enpalUrl}`);
-		this.wallboxClient = new WallboxBlazorClient(enpalUrl, this.log);
+		this.wallboxClient = new WallboxBlazorClient(enpalUrl, this.log, this);
 
 		await this._createWallboxStates();
 		this.subscribeStates(`${WALLBOX_CHANNEL}.*`);
@@ -299,13 +299,13 @@ class Enpal extends utils.Adapter {
 				this.log.info('Wallbox: starting charge');
 				await this.wallboxClient.start();
 				await this.setState(`${WALLBOX_CHANNEL}.start`, { val: false, ack: true });
-				await new Promise(r => setTimeout(r, 1000));
+				await this.delay(1000);
 				await this._pollWallboxStatus();
 			} else if (stateKey === 'stop' && state.val === true) {
 				this.log.info('Wallbox: stopping charge');
 				await this.wallboxClient.stop();
 				await this.setState(`${WALLBOX_CHANNEL}.stop`, { val: false, ack: true });
-				await new Promise(r => setTimeout(r, 1000));
+				await this.delay(1000);
 				await this._pollWallboxStatus();
 			} else if (stateKey === 'mode') {
 				const mode = String(state.val).toLowerCase();
@@ -315,7 +315,7 @@ class Enpal extends utils.Adapter {
 				}
 				this.log.info(`Wallbox: setting mode to ${mode}`);
 				await this.wallboxClient.setMode(mode);
-				await new Promise(r => setTimeout(r, 1500));
+				await this.delay(1500);
 				await this.wallboxClient.fetchDeviceMessagesStatus();
 				await this._applyWallboxReadings({
 					mode: this.wallboxClient.mode || MODE_LABELS[mode],
