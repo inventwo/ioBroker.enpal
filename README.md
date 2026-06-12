@@ -139,6 +139,7 @@ enpal.0.wallbox_control.<state>
 ### **WORK IN PROGRESS**
 - (skvarel) Fixed missing wallbox_help_readme translation in English and German admin UI
 - (skvarel) Replaced plain timers in wallbox client with adapter-core setInterval, setTimeout and delay helpers
+- (skvarel) Updated @iobroker/types to 7.1.2 for js-controller 7.1 compatibility
 
 ### 0.4.1 (2026-06-10)
 - (skvarel) Typed adapter and instance root namespaces as meta folders for a cleaner object tree
