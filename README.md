@@ -136,6 +136,7 @@ enpal.0.wallbox_control.<state>
 <!--
 	### **WORK IN PROGRESS**
 -->
+
 ### 0.4.2 (2026-06-12)
 - (skvarel) Fixed missing wallbox_help_readme translation in English and German admin UI
 - (skvarel) Replaced plain timers in wallbox client with adapter-core setInterval, setTimeout and delay helpers
