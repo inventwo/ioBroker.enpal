@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "enpal",
-    "version": "0.4.2",
+    "version": "0.4.3",
     "news": {
+      "0.4.3": {
+        "en": "Sync wallbox_control.mode from status when charge mode is changed via the Enpal app",
+        "de": "Sync wallbox control.mode vom Status, wenn der Lademodus über die Enpal App geändert wird",
+        "ru": "Синхронизация wallbox control.mode со статусом при изменении режима зарядки через приложение Enpal",
+        "pt": "Sincronize wallbox control.mode a partir do estado quando o modo de carga é alterado através do aplicativo Enpal",
+        "nl": "De wallbox control.mode synchroniseren vanaf status wanneer de laadmodus wordt gewijzigd via de Enpal-app",
+        "fr": "Synchroniser wallbox control.mode à partir de l'état lorsque le mode charge est modifié via l'application Enpal",
+        "it": "Sync wallbox control.mode da stato quando la modalità di carica viene modificata tramite l'app Enpal",
+        "es": "Sync wallbox control.mode desde el estado cuando el modo de carga se cambia a través de la aplicación Enpal",
+        "pl": "Sync wallbox _ control.mode from status when charge mode is changed via the Enpal app",
+        "uk": "Sync Wallbox control.mode від стану при зміні режиму заряду через додаток Enpal",
+        "zh-cn": "通过 Enpal app 更改充电模式时, 从状态同步 wallbox  control.mode"
+      },
       "0.4.2": {
         "en": "Fixed missing wallbox_help_readme translation in English and German admin UI\nReplaced plain timers in wallbox client with adapter-core setInterval, setTimeout and delay helpers\nUpdated iobroker/types for js-controller 7.1 compatibility",
         "de": "Fehlende Wallbox help readme-Übersetzung in Englisch und Deutsch admin UI behoben\nErsetzte einfache Timer im Wallbox-Client durch Adapter-Core-SetInterval, SetTimeout und Verzögerungshelfer\nAktualisierte iobroker/types für js-controller 7.1 Kompatibilität",
@@ -80,19 +93,6 @@
         "pl": "Dodano link do CHANGELOG _ OLD.md w readme\nAktualizacja @ alcalzone / release- script i powiązanych wtyczek",
         "uk": "Додано посилання на CHANGELOG OLD.md на readme\nОновлено @alcalzone/випуск-script і пов'язані плагіни",
         "zh-cn": "在readme 上添加到 ChangeGELOG OLD.md 的链接\n更新了 @alcalzone/ release-script 及相关插件"
-      },
-      "0.2.0": {
-        "en": "Updated minimum Node.js version requirement to >=22\nNormalize unit display: \"Percent\" is now shown as \"%\"",
-        "de": "Aktualisierte Mindestanforderungen an Node.js-Versionen an >=22\nNormalisieren Einheitsanzeige: \"Prozent\" wird nun als \"%\" angezeigt",
-        "ru": "Минимальное требование Node.js для версии >=22\nНормализовать единичный дисплей: «Процент» теперь отображается как «%»",
-        "pt": "Requisitos de versão Node.js mínimos atualizados para >=22\nNormalizar a exibição da unidade: \"Percentagem\" é agora mostrado como \"%s\"",
-        "nl": "Voor de toepassing van deze onderverdeling wordt verstaan onder:\nEenheidsweergave normaliseren: \"Percent\" wordt nu weergegeven als \"%\"",
-        "fr": "Mise à jour de l'exigence minimale de la version Node.js à >=22\nNormaliser l'affichage de l'unité : \"Pourcentage\" est maintenant affiché comme \"%\"",
-        "it": "Requisiti di versione minima Node.js aggiornati a >=22\nNormalizzare il display dell'unità: \"Percent\" è ora indicato come \"%\"",
-        "es": "Mínimo Actualizado Node.js versión requerimiento para √22\nNormalizar la pantalla de la unidad: \"Percent\" ahora se muestra como \"%\"",
-        "pl": "Aktualizacja minimalnego wymogu wersji Node.js do > = 22\nWyświetlacz jednostki normalizującej: \"Procent\" jest teraz pokazywany jako \"%\"",
-        "uk": "Оновлена мінімальна вимога версії Node.js до >=22\nНормалізація дисплея блока: \"Попередня\" тепер відображається як \"%\"",
-        "zh-cn": "将最小节点\n规范化单位显示 : “ percent” 现在显示为 “%% ”"
       }
     },
     "titleLang": {

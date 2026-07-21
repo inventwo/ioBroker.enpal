@@ -136,7 +136,7 @@ enpal.0.wallbox_control.<state>
 <!--
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.4.3 (2026-07-21)
 - (skvarel) Sync wallbox_control.mode from status when charge mode is changed via the Enpal app
 
 ### 0.4.2 (2026-06-12)
@@ -157,12 +157,6 @@ enpal.0.wallbox_control.<state>
 - (skvarel) Added optional wallbox control via Enpal Box web interface (Blazor SignalR)
 - (skvarel) New config option: wallbox_enabled (checkbox); Enpal Box URL is derived automatically from InfluxDB URL
 - (skvarel) New states under wallbox_control: start, stop, mode, currentMode, connectorStatus
-
-### 0.2.2 (2026-06-05)
-- (skvarel) Migrated project rules from GitHub Copilot to Cursor rules
-- (skvarel) Updated @alcalzone/release-script to 5.2.1 to fix repository checker error E0036
-- (skvarel) Updated @tsconfig/node22 to 22.0.5
-- (skvarel) Fixed mixed indentation in admin/jsonConfig.json
 
 ## Older changes
 - [CHANGELOG_OLD.md](CHANGELOG_OLD.md)

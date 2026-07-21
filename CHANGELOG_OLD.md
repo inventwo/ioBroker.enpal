@@ -1,4 +1,10 @@
 # Older changes
+## 0.2.2 (2026-06-05)
+- (skvarel) Migrated project rules from GitHub Copilot to Cursor rules
+- (skvarel) Updated @alcalzone/release-script to 5.2.1 to fix repository checker error E0036
+- (skvarel) Updated @tsconfig/node22 to 22.0.5
+- (skvarel) Fixed mixed indentation in admin/jsonConfig.json
+
 ## 0.2.1 (2026-05-25)
 - (skvarel) Added link to CHANGELOG_OLD.md at readme 
 - (skvarel) Updated @alcalzone/release-script and related plugins
