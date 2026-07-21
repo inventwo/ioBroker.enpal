@@ -10,6 +10,23 @@ const WALLBOX_CHANNEL = 'wallbox_control';
 const VALID_MODES = ['eco', 'solar', 'full', 'smart'];
 const MODE_LABELS = { eco: 'Eco', solar: 'Solar', full: 'Full', smart: 'Smart' };
 
+/**
+ * Map a reported mode label (e.g. "Solar", "Full", "Fast") to the control value.
+ *
+ * @param {string} label Reported mode label from deviceMessages or InfluxDB
+ * @returns {string|null} Control value (`eco`/`solar`/`full`/`smart`) or null if unknown
+ */
+function modeLabelToControlValue(label) {
+	if (!label) {
+		return null;
+	}
+	const lower = String(label).trim().toLowerCase();
+	if (lower === 'fast') {
+		return 'full';
+	}
+	return VALID_MODES.includes(lower) ? lower : null;
+}
+
 class Enpal extends utils.Adapter {
 	constructor(options) {
 		super({
@@ -214,6 +231,10 @@ class Enpal extends utils.Adapter {
 			const normalized =
 				MODE_NORMALIZE[raw.toLowerCase()] || raw.charAt(0).toUpperCase() + raw.slice(1).toLowerCase();
 			await this.setStateAsync(`${WALLBOX_CHANNEL}.currentMode`, { val: normalized, ack: true });
+			const controlMode = modeLabelToControlValue(normalized);
+			if (controlMode) {
+				await this.setStateAsync(`${WALLBOX_CHANNEL}.mode`, { val: controlMode, ack: true });
+			}
 			this.log.debug(`Wallbox currentMode from InfluxDB: ${normalized}`);
 		}
 
@@ -265,6 +286,11 @@ class Enpal extends utils.Adapter {
 	async _applyWallboxReadings({ mode, status, automaticChargeStatus }) {
 		if (mode) {
 			await this.setStateAsync(`${WALLBOX_CHANNEL}.currentMode`, { val: mode, ack: true });
+			// Keep the writable control state in sync (e.g. mode changed via Enpal app)
+			const controlMode = modeLabelToControlValue(mode);
+			if (controlMode) {
+				await this.setStateAsync(`${WALLBOX_CHANNEL}.mode`, { val: controlMode, ack: true });
+			}
 		}
 		if (status) {
 			await this.setStateAsync(`${WALLBOX_CHANNEL}.connectorStatus`, { val: status, ack: true });

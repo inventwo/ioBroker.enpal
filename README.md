@@ -66,7 +66,7 @@ enpal.0.wallbox_control.<state>
 |-------|------|------|-------|-------------|
 | `start` | button | no | yes | Start charging (set to `true` to trigger) |
 | `stop` | button | no | yes | Stop charging (set to `true` to trigger) |
-| `mode` | value | yes | yes | Set charge mode: `eco`, `solar`, `full`, or `smart` |
+| `mode` | value | yes | yes | Charge mode control: `eco`, `solar`, `full`, or `smart`. Also synced from the wallbox when the mode is changed via the Enpal app |
 | `currentMode` | text | yes | no | Current charge mode reported by the wallbox (e.g. `Eco`, `Solar`, `Full`) |
 | `connectorStatus` | text | yes | no | OCPP connector status from the wallbox (see [Connector status values](#connector-status-values)) |
 | `automaticChargeStatus` | text | yes | no | Automatic charge on plug-in (`On` / `Off`; read-only, change via Enpal app) |
@@ -74,7 +74,7 @@ enpal.0.wallbox_control.<state>
 **How it works**
 
 - **Control** (mode, start, stop): The adapter connects to `http://<enpal-box>/wallbox` via Blazor SignalR (same approach as the [Home Assistant Enpal integration](https://github.com/derolli1976/enpal)) and simulates button clicks.
-- **Status** (`currentMode`, `connectorStatus`, `automaticChargeStatus`): Read from the Enpal Box page `http://<enpal-box>/deviceMessages` (`Mode.Charge.Connector.1`, `Status.Wallbox.Connector.1`, `Wallbox.Settings.AutomaticChargeStatus.Connector.1`). Updated on each sync interval and after control actions.
+- **Status** (`currentMode`, `connectorStatus`, `automaticChargeStatus`): Read from the Enpal Box page `http://<enpal-box>/deviceMessages` (`Mode.Charge.Connector.1`, `Status.Wallbox.Connector.1`, `Wallbox.Settings.AutomaticChargeStatus.Connector.1`). Updated on each sync interval and after control actions. The writable `mode` state is updated as well (with `ack: true`) so VIS dropdowns stay in sync when the mode is changed outside ioBroker.
 
 #### Connector status values
 
@@ -136,6 +136,8 @@ enpal.0.wallbox_control.<state>
 <!--
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (skvarel) Sync wallbox_control.mode from status when charge mode is changed via the Enpal app
 
 ### 0.4.2 (2026-06-12)
 - (skvarel) Fixed missing wallbox_help_readme translation in English and German admin UI

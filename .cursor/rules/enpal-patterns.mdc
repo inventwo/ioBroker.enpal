@@ -46,7 +46,7 @@ alwaysApply: false
 - States:
   - `wallbox_control.start` — boolean button (write `true` to start charging)
   - `wallbox_control.stop` — boolean button (write `true` to stop charging)
-  - `wallbox_control.mode` — string enum: `eco`, `solar`, `full`, `smart`
+  - `wallbox_control.mode` — string enum: `eco`, `solar`, `full`, `smart` (also synced from status with ack when changed externally)
   - `wallbox_control.currentMode` — read-only, synced from Enpal Box HTML
   - `wallbox_control.connectorStatus` — read-only, synced from Enpal Box HTML
 - Wallbox status is refreshed on each Influx poll cycle via HTTP GET `/wallbox`
