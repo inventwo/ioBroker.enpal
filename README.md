@@ -136,6 +136,12 @@ enpal.0.wallbox_control.<state>
 <!--
 	### **WORK IN PROGRESS**
 -->
+
+### **WORK IN PROGRESS**
+- (skvarel) Updated @iobroker/adapter-core to 3.4.3 (repository checker W0034)
+- (skvarel) Updated CI check action to testing-action-check@v2 (repository checker W3028)
+- (skvarel) Updated @iobroker/testing to 6.2.2 and release-script-plugin-license to 5.2.2
+
 ### 0.4.3 (2026-07-21)
 - (skvarel) Sync wallbox_control.mode from status when charge mode is changed via the Enpal app
 
