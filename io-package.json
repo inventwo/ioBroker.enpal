@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "enpal",
-    "version": "0.4.3",
+    "version": "0.4.4",
     "news": {
+      "0.4.4": {
+        "en": "Updated @iobroker/adapter-core to 3.4.3 (repository checker W0034)\nUpdated CI check action to testing-action-check@v2 (repository checker W3028)\nUpdated @iobroker/testing to 6.2.2 and release-script-plugin-license to 5.2.2",
+        "de": "@iobroker /adapter-core auf 3.4.3 aktualisiert (Repository-Checker W0034)\nCI-Prüfung auf testing-action-check @v2 aktualisiert (Repository-Checker W3028)\n@iobroker /testing auf 6.2.2 und release-script-plugin-license auf 5.2.2 aktualisiert",
+        "ru": "Обновлено @iobroker /adapter-core до версии 3.4.3 (средство проверки репозитория W0034)\nОбновлено действие проверки CI до testing-action-check @v2 (средство проверки репозитория W3028)\nОбновлено @iobroker /testing до 6.2.2 и лицензия на выпуск скриптов и плагинов до 5.2.2",
+        "pt": "@iobroker /adapter-core atualizado para 3.4.3 (W0034)\nAtualizou a ação de verificação de CI para testing-action-check @v2 (W3028)\nAtualizou @iobroker /testing para 6.2.2 e release-script-plugin-license para 5.2.2",
+        "nl": "@iobroker /adapter-core bijgewerkt naar 3.4.3 (repository checker W0034)\nDe CI-checkactie is bijgewerkt naar testing-action-check @v2 (repository-checker W3028)\n@iobroker /testing bijgewerkt naar 6.2.2 en release-script-plugin-license naar 5.2.2",
+        "fr": "Mise à jour de @iobroker /adapter-core en 3.4.3 (Repository Checker W0034)\nAction CI Check mise à jour vers testing-action-check @v2 (Repository Checker W3028)\n@iobroker /testing a été mis à jour en 6.2.2 et release-script-plugin-license en 5.2.2",
+        "it": "@iobroker /adapter-core aggiornato alla 3.4.3 (W0034)\nControllo CI aggiornato a testing-action-check @v2 (Repository Checker W3028)\n@iobroker /testing aggiornato a 6.2.2 e release-script-plugin-license a 5.2.2",
+        "es": "Se actualizó @iobroker /adapter-core a 3.4.3 (comprobador de repositorios W0034)\nSe actualizó la acción de CI check a testing-action-check @v2 (comprobador de repositorios W3028)\nSe actualizó @iobroker /testing a 6.2.2 y release-script-plugin-license a 5.2.2",
+        "pl": "Zaktualizowano @iobroker /adapter-core do wersji 3.4.3 (moduł sprawdzania repozytorium W0034)\nZaktualizowano akcję sprawdzenia CI do testing-action-check @v2 (moduł sprawdzania repozytorium W3028)\nZaktualizowano @iobroker /testing do wersji 6.2.2 i release-script-plugin-license do wersji 5.2.2",
+        "uk": "Оновлено @iobroker /адаптер-ядро до 3.4.3 (перевірка сховища W0034)\nОновлена дія перевірки CI для тестування-дії-перевірка @v2 (перевірка сховища W3028)\nОновлено @iobroker /тестування до 6.2.2 та ліцензія випуску сценаріїв плагінів до 5.2.2",
+        "zh-cn": "将 @iobroker /adapter-core 更新到 3.4.3（存储库检查器 W0034）\n将 CI 检查操作更新为测试操作检查 @v2（存储库检查器 W3028）\n将 @iobroker /testing 更新到 6.2.2 并将脚本插件许可证发布到 5.2.2"
+      },
       "0.4.3": {
         "en": "Sync wallbox_control.mode from status when charge mode is changed via the Enpal app",
         "de": "Sync wallbox control.mode vom Status, wenn der Lademodus über die Enpal App geändert wird",
@@ -80,19 +93,6 @@
         "pl": "Migrowane zasady projektu z GitHub Copilot do zasad kursora\nAktualizacja @ alcalzone / release- script do 5.2.1, aby naprawić błąd kontrolera repozytorium E0036\nAktualizacja @ tsconfig / node22 do 22.0.5\nNaprawiono wcięcie mieszane w admin / jsonConfig.json",
         "uk": "Миттєві правила проекту від GitHub Copilot до правил Cursor\nОновлено @alcalzone/видання до 5.2.1, щоб виправити помилки репозиторій\nОновлено @tsconfig/node22 до 22.0.5\nФіксований змішаний відступ в адмін / jsonConfig.json",
         "zh-cn": "从 GitHub 副驾驶到光标规则\n更新 @alcalzone/ release-script 到 5.2.1 以固定仓库检查器错误 E0036\n更新为 @tsconfig/node22 到 22.0\n固定混合缩进"
-      },
-      "0.2.1": {
-        "en": "Added link to CHANGELOG_OLD.md at readme \nUpdated @alcalzone/release-script and related plugins",
-        "de": "Link zu CHANGELOG OLD.md bei readme hinzugefügt\nAktualisierte @alcalzone/Release-script und verwandte Plugins",
-        "ru": "Добавлена ссылка на CHANGELOG OLD.md в readme\nОбновленный @alcalzone/releasescript и связанные плагины",
-        "pt": "Adicionado link para CHANGELOG OLD.md at readme\nAtualizado @ alcalzone/release-script e plug-ins relacionados",
-        "nl": "Link toegevoegd aan VERANDERINGLOG OLD.md bij readme\nBijgewerkt @alcalzone/release-script en bijbehorende plugins",
-        "fr": "Ajout d'un lien vers CHANGELOG OLD.md à readme\nMise à jour @alcalzone/release-script et plugins associés",
-        "it": "Aggiunto il link a CHANGELOG OLD.md a readme\nAggiornato @alcalzone/release-script e relativi plugin",
-        "es": "Añadido el enlace a CHANGELOG OLD.md en readme\nActualizado @alcalzone/release-script y plugins relacionados",
-        "pl": "Dodano link do CHANGELOG _ OLD.md w readme\nAktualizacja @ alcalzone / release- script i powiązanych wtyczek",
-        "uk": "Додано посилання на CHANGELOG OLD.md на readme\nОновлено @alcalzone/випуск-script і пов'язані плагіни",
-        "zh-cn": "在readme 上添加到 ChangeGELOG OLD.md 的链接\n更新了 @alcalzone/ release-script 及相关插件"
       }
     },
     "titleLang": {

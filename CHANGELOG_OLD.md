@@ -1,4 +1,9 @@
 # Older changes
+## 0.3.0 (2026-06-07)
+- (skvarel) Added optional wallbox control via Enpal Box web interface (Blazor SignalR)
+- (skvarel) New config option: wallbox_enabled (checkbox); Enpal Box URL is derived automatically from InfluxDB URL
+- (skvarel) New states under wallbox_control: start, stop, mode, currentMode, connectorStatus
+
 ## 0.2.2 (2026-06-05)
 - (skvarel) Migrated project rules from GitHub Copilot to Cursor rules
 - (skvarel) Updated @alcalzone/release-script to 5.2.1 to fix repository checker error E0036
